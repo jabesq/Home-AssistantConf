@@ -1,0 +1,56 @@
+homeassistant:
+    # Name of the location where Home Assistant is running
+    name: Home
+    # C for Celcius, F for Fahrenheit
+    temperature_unit: C
+    unit_system: metric
+    # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+    time_zone: Europe/Paris
+    #location required to calculate the time the sun rises and sets
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    elevation: 0
+    packages: !include_dir_named packages
+
+config:
+
+#Geofencing setup
+zone:
+    name: work
+    latitude: !secret work_latitude
+    longitude: !secret work_longitude
+    radius: 200
+    icon: mdi:briefcase
+
+# Track the sun
+sun:
+
+recorder:
+    purge_days: 10
+
+
+# Enables support for tracking state changes over time.
+history:
+
+logbook:
+
+# Enables the frontend
+frontend:
+
+# Checks for available updates
+updater:
+
+# Discover some devices automatically
+discovery:
+
+#Zeroconf/Avahi/Bonjour
+zeroconf:
+
+alarm_control_panel:
+    platform: manual
+    pending_time: 30
+
+#Sensors
+sensor: !include sensors.yaml
+
+automation: !include automations.yaml

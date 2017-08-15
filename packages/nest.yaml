@@ -1,0 +1,21 @@
+homeassistant:
+    customize:
+        sensor.living_room_nest_protect_battery_health:
+            friendly_name: Batterie Nest Protect
+        sensor.living_room_nest_protect_smoke_status:
+            friendly_name: Détecteur de fumée
+        sensor.living_room_nest_protect_co_status:
+            friendly_name: Détecteur de Monoxyde de Carbone
+
+nest:
+  client_id: 47c5cb77-ebc9-4d18-84e2-3e03334cb8ec
+  client_secret: 5rHbg1HXwIZCRsGtLH9ANEt2D
+
+group:
+    nest_protect:
+        name: Nest Protect
+        entities:
+          - binary_sensor.living_room_nest_protect_online
+          - sensor.living_room_nest_protect_battery_health
+          - sensor.living_room_nest_protect_smoke_status
+          - sensor.living_room_nest_protect_co_status

@@ -1,0 +1,34 @@
+- platform: time_date
+  display_options:
+    - 'time'
+
+- platform: yr
+  monitored_conditions:
+    - symbol
+
+- platform: darksky
+  api_key: !secret forecast_api_key
+  monitored_conditions:
+    - summary
+    - precip_intensity
+    - precip_probability
+    - apparent_temperature
+    - dew_point
+    - wind_speed
+    - wind_bearing
+    - cloud_cover
+    - pressure
+    - visibility
+    - ozone
+
+- platform: uber
+  server_token: !secret server_token
+  start_latitude: !secret home_latitude
+  start_longitude: !secret home_longitude
+  product_ids:
+    - 'f2ea021d-af59-4511-8dca-1c4a6cfc8f9b'
+
+- platform: waqi
+  token: !secret waqi_token
+  locations:
+    - Nice Aeroport
