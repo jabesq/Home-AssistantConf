@@ -1,0 +1,30 @@
+sensor:
+  - platform: speedtest
+    minute:
+      - 0
+      - 15
+      - 30
+      - 45
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+  
+  - platform: statistics
+    entity_id: sensor.speedtest_download
+    name: Stats Speedtest download
+  
+  - platform: statistics
+    entity_id: sensor.speedtest_upload
+    name: Stats Speedtest upload
+    
+
+group:
+    speedtest:
+        name: Speedtest
+        entities:
+          - sensor.speedtest_download
+          - sensor.speedtest_ping
+          - sensor.speedtest_upload
+          - sensor.stats_speedtest_download_mean
+          - sensor.stats_speedtest_upload_mean

@@ -1,0 +1,30 @@
+homeassistant:
+    customize:
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_alarm_level:
+            hidden: true
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_alarm_type:
+            hidden: true
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_exporting:
+            hidden: true
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_power_2:
+            hidden: true
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_power_management:
+            hidden: true
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_sourcenodeid:
+            hidden: true
+        sensor.aeotec_zw100_multisensor_6_alarm_level:
+            hidden: true
+        sensor.aeotec_zw100_multisensor_6_alarm_type:
+            hidden: true
+        sensor.aeotec_zw100_multisensor_6_sourcenodeid:
+            hidden: true
+        climate.remotec_zxt120eu_unused_4:
+            hidden: true
+        climate.remotec_zxt120eu_unused_6:
+            hidden: true
+
+zwave:
+    usb_path: /dev/ttyACM0
+
+climate:
+  - platform: zwave

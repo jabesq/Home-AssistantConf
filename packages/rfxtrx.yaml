@@ -1,0 +1,31 @@
+rfxtrx:
+    device: /dev/ttyUSB0
+
+switch:
+    platform: rfxtrx
+    automatic_add: True
+    devices:
+        0b110001017d14de0a000070:
+            name: switch RFXCom
+        0b11000519bc0cfe00010f70:
+            name: interrupteur Cuisine
+        0b11000573bc0cfe05010f70:
+            name: interrupteur Couloir
+        0b11000532bc0cfe03010f70:
+            name: interrupteur Salon 1
+        0b11000386bc0cfe06010f70:
+            name: interrupteur Salon 2
+cover:
+  - platform: rfxtrx
+    automatic_add: False
+    devices:
+        071a000001020304: # RFY
+            name: Volet Salon
+        071a000001020305: # RFY
+            name: Volet Chambre
+        071a000001020306: # RFY
+            name: Volet Cuisine
+
+sensor:
+- platform: rfxtrx
+  automatic_add: True
