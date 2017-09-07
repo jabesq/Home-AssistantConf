@@ -1,0 +1,379 @@
+###############################################################################
+# PACKAGE:      Harmony
+# Description:  
+###############################################################################
+
+remote:
+    platform: harmony
+    name: Salon
+    activity: 'Regarder Apple TV'
+
+sensor:
+    platform: template
+    sensors:
+        harmony_salon:
+            value_template: '{{ states.remote.harmony_hub.attributes.current_activity }}'
+            friendly_name: 'Harmony Salon'
+
+group:
+    harmony_hub:
+        name: Harmony Hub
+        icon: mdi:remote
+        entities:
+          - sensor.harmony_salon
+          - remote.harmony_hub
+          - input_boolean.appletv
+          - input_boolean.ps4
+          - input_boolean.switch
+          - input_boolean.music
+          - input_boolean.television
+
+#These inputs are mainly used as script flags
+input_boolean:
+    appletv:
+        name: Regarder Apple TV
+        icon: mdi:apple
+    music:
+        name: Écouter de la musique
+        icon: mdi:music-circle
+    ps4:
+        name: Jouer à PS4
+        icon: mdi:playstation
+    switch:
+        name: Jouer à la Switch
+        icon: mdi:tablet
+    television:
+        name: Regarder la TV
+        icon: mdi:television
+
+
+input_select:
+    harmony:
+        name: Harmony Activities
+        initial: PowerOff
+        options:
+          - Regarder Apple TV
+          - Jouer à PS4
+          - Jouer a la Switch
+          - Écouter de la musique
+          - Regarder la TV
+          - PowerOff
+
+automation:
+  - alias: Remote external update living room
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    action:
+      service: input_select.select_option
+      data_template:
+        entity_id: input_select.harmony
+        option: '{{ states.remote.harmony_hub.attributes.current_activity }}'
+  - alias: Remote start activity from input select living room tv
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_select.harmony
+    condition:
+      condition: template
+      value_template: '{{ states.remote.harmony_hub.attributes.current_activity != states.input_select.harmony.state
+        }}'
+    action:
+      service: remote.turn_on
+      data_template:
+        entity_id: remote.harmony_hub
+        activity: '{{ states.input_select.harmony.state }}'
+  - alias: "Arr\xEAter Harmony Hub"
+    hide_entity: true
+    trigger:
+    - platform: state
+      entity_id: input_boolean.appletv
+      to: 'off'
+    - platform: state
+      entity_id: input_boolean.music
+      to: 'off'
+    - platform: state
+      entity_id: input_boolean.ps4
+      to: 'off'
+    - platform: state
+      entity_id: input_boolean.switch
+      to: 'off'
+    - platform: state
+      entity_id: input_boolean.television
+      to: 'off'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.appletv
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.music
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.ps4
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.switch
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.television
+        state: 'off'
+      - condition: state
+        entity_id: remote.harmony_hub
+        state: 'on'
+    action:
+      service: remote.turn_off
+      data:
+        entity_id: remote.harmony_hub
+  - alias: "Jouer PS4 demarr\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.attributes.current_activity == \"Jouer\
+          \ \xE0 PS4\" }}"
+      - condition: state
+        entity_id: input_boolean.ps4
+        state: 'off'
+    action:
+      service: input_boolean.turn_on
+      entity_id: input_boolean.ps4
+  - alias: "Jouer PS4 arr\xEAt\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.attributes.current_activity != \"Jouer\
+          \ \xE0 PS4\" }}"
+      - condition: state
+        entity_id: input_boolean.ps4
+        state: 'on'
+    action:
+      service: input_boolean.turn_off
+      entity_id: input_boolean.ps4
+  - alias: "D\xE9marrer Jouer \xE0 PS4"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_boolean.ps4
+      to: 'on'
+    condition:
+      condition: template
+      value_template: "{{ states.remote.harmony_hub.attributes.current_activity != \"\
+        Jouer \xE0 PS4\" }}"
+    action:
+      service: remote.turn_on
+      data:
+        activity: "Jouer \xE0 PS4"
+        entity_id: remote.harmony_hub
+  - alias: "Jouer Switch demarr\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.attributes.current_activity == "Jouer a
+          la Switch" }}'
+      - condition: state
+        entity_id: input_boolean.switch
+        state: 'off'
+    action:
+      service: input_boolean.turn_on
+      entity_id: input_boolean.switch
+  - alias: "Jouer Switch arr\xEAt\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.attributes.current_activity != "Jouer a
+          la Switch" }}'
+      - condition: state
+        entity_id: input_boolean.switch
+        state: 'on'
+    action:
+      service: input_boolean.turn_off
+      entity_id: input_boolean.switch
+  - alias: "D\xE9marrer Jouer a la Switch"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_boolean.switch
+      to: 'on'
+    condition:
+      condition: template
+      value_template: '{{ states.remote.harmony_hub.attributes.current_activity != "Jouer
+        a la Switch" }}'
+    action:
+      service: remote.turn_on
+      data:
+        activity: Jouer a la Switch
+        entity_id: remote.harmony_hub
+  - alias: "Regarder TV demarr\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.attributes.current_activity == "Regarder
+          la TV" }}'
+      - condition: state
+        entity_id: input_boolean.television
+        state: 'off'
+    action:
+      service: input_boolean.turn_on
+      entity_id: input_boolean.television
+  - alias: "Regarder TV arr\xEAt\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+    - entity_id: remote.harmony_hub
+      platform: state
+    condition:
+    - condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.attributes.current_activity != "Regarder
+          la TV" }}'
+      - condition: state
+        entity_id: input_boolean.television
+        state: 'on'
+    action:
+    - entity_id: input_boolean.television
+      service: input_boolean.turn_off
+  - alias: "D\xE9marrer Regarder la TV"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_boolean.television
+      to: 'on'
+    condition:
+      condition: template
+      value_template: '{{ states.remote.harmony_hub.attributes.current_activity != "Regarder
+        la TV" }}'
+    action:
+      service: remote.turn_on
+      data:
+        activity: Regarder la TV
+        entity_id: remote.harmony_hub
+  - alias: "Regarder Apple TV demarr\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.attributes.current_activity == "Regarder
+          Apple TV" }}'
+      - condition: state
+        entity_id: input_boolean.appletv
+        state: 'off'
+    action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.appletv
+    - service: media_player.turn_on
+      entity_id: media_player.apple_tv
+  - alias: "Regarder Apple TV arr\xEAt\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.attributes.current_activity != "Regarder
+          Apple TV" }}'
+      - condition: state
+        entity_id: input_boolean.appletv
+        state: 'on'
+    action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.appletv
+    - service: media_player.turn_off
+      entity_id: media_player.apple_tv
+  - alias: "D\xE9marrer Regarder AppleTV"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_boolean.appletv
+      to: 'on'
+    action:
+    - service: media_player.turn_on
+      entity_id: media_player.apple_tv
+    - condition: template
+      value_template: '{{ states.remote.harmony_hub.attributes.current_activity != "Regarder
+        Apple TV" }}'
+    - service: remote.turn_on
+      data:
+        activity: Regarder Apple TV
+        entity_id: remote.harmony_hub
+  - alias: "Ecouter musique demarr\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.attributes.current_activity == \"\xC9couter\
+          \ de la musique\" }}"
+      - condition: state
+        entity_id: input_boolean.music
+        state: 'off'
+    action:
+      service: input_boolean.turn_on
+      entity_id: input_boolean.music
+  - alias: "Ecouter musique arr\xEAt\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: "{{ trigger.to_state.attributes.current_activity != \"\xC9couter\
+          \ de la musique\" }}"
+      - condition: state
+        entity_id: input_boolean.music
+        state: 'on'
+    action:
+      service: input_boolean.turn_off
+      entity_id: input_boolean.music
+  - alias: "D\xE9marrer Ecouter de la musique"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_boolean.music
+      to: 'on'
+    condition:
+      condition: template
+      value_template: "{{ states.remote.harmony_hub.attributes.current_activity != \"\
+        \xC9couter de la musique\" }}"
+    action:
+      service: remote.turn_on
+      data:
+        activity: "\xC9couter de la musique"
+        entity_id: remote.harmony_hub

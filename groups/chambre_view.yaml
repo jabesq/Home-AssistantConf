@@ -1,0 +1,9 @@
+chambres_view:
+    view: yes
+    icon: mdi:hotel
+    entities:
+      - group.lumieres_chambre
+      - group.netatmo_chambre
+      - group.lumiere_chambre_enfant
+      - group.netatmo_chambre_enfant
+      - cover.volet_chambre_amis

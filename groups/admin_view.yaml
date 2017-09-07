@@ -1,0 +1,19 @@
+admin_view:
+    view: yes
+    icon: mdi:tune
+    entities:
+      - group.zw_multisensor_entree
+      - group.zw_arbre_lumiere
+      - group.nest_protect
+      - group.traffic
+      - group.calendar
+      - group.all_switches
+
+traffic:
+    name: Traffic
+    entities:
+      - proximity.home
+      - sensor.retour_maison
+      - sensor.trajet_travailmaison
+      - sensor.trajet_maisontravail
+      - sensor.uberx_time

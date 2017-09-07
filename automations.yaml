@@ -1,0 +1,263 @@
+- alias: Vanessa est partie
+  id: vanessa_left
+  hide_entity: true
+  trigger:
+    platform: state
+    entity_id: device_tracker.vanessa
+    to: not_home
+    for:
+      minutes: 5
+  action:
+    service: ifttt.trigger
+    data:
+      event: vanessa_leaves
+- alias: Appartement Vide
+  id: empty_flat
+  hide_entity: true
+  trigger:
+  - entity_id: group.all_devices
+    for:
+      minutes: 1
+    platform: state
+    to: not_home
+  action:
+  - data:
+      entity_id: group.all_lights
+    service: homeassistant.turn_off
+  - data:
+      entity_id: media_player.bureau,media_player.cuisine,media_player.salon
+    service: media_player.media_pause
+  - data:
+      entity_id: switch.ganondorf_schedule
+    service: switch.turn_on
+  - data:
+      entity_id: alarm_control_panel.ha_alarm
+    service: alarm_control_panel.alarm_arm_away
+- alias: "Appartement occup\xE9"
+  id: full_house
+  hide_entity: true
+  trigger:
+  - entity_id: group.all_devices
+    platform: state
+    to: home
+  action:
+  - data:
+      entity_id: switch.ganondorf_schedule
+    service: switch.turn_off
+  - data:
+      entity_id: alarm_control_panel.ha_alarm
+    service: alarm_control_panel.alarm_disarm
+- alias: Restart alarm if away
+  hide_entity: true
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: group.all_devices
+    state: not_home
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    entity_id: alarm_control_panel.ha_alarm
+- alias: 'Rapport Activite Elsys #work'
+  id: erp_elsys
+  hide_entity: true
+  trigger:
+    platform: time
+    at: '14:30:00'
+  condition:
+    condition: zone
+    entity_id: device_tracker.hugo_iphone_6s
+    zone: zone.work
+  action:
+    service: notify.pushbullet
+    data:
+      message: "Rapport Activit\xE9 Elsys"
+      title: ERP
+      data:
+        url: https://portail.advans-group.com/ActivityReport
+- alias: Batterie iPhone faible
+  id: low_battery_iphone
+  hide_entity: true
+  trigger:
+  - below: 30
+    entity_id: sensor.battery_iphone
+    platform: numeric_state
+  - entity_id: device_tracker.hugo_iphone_6s
+    event: enter
+    platform: zone
+    zone: zone.work
+  - entity_id: device_tracker.hugo_iphone_6s
+    event: enter
+    platform: zone
+    zone: zone.home
+  condition:
+  - condition: and
+    conditions:
+    - condition: or
+      conditions:
+      - condition: zone
+        entity_id: device_tracker.hugo_iphone_6s
+        zone: zone.work
+      - condition: zone
+        entity_id: device_tracker.hugo_iphone_6s
+        zone: zone.home
+    - below: 30
+      condition: numeric_state
+      entity_id: sensor.battery_iphone
+  action:
+  - data:
+      message: Batterie iPhone < 30%, penser a recharger
+      title: Batterie iPhone
+    service: notify.pushbullet
+- action:
+  - alias: "extinction Arbre lumi\xE8re"
+    data:
+      entity_id: switch.arbre_lumiere_switch
+    service: switch.turn_off
+  - alias: Fermeture Volet
+    data:
+      entity_id: cover.global_cover
+    service: cover.close_cover
+  - alias: Extinction TV
+    data:
+      entity_id: remote.harmony_hub
+    service: remote.turn_off
+  - alias: Arret Clim
+    data:
+      entity_id: climate.remotec_zxt120eu_cooling_1
+      operation_mode: 'Off'
+    service: climats.set_operation_mode
+  alias: Au Dodo
+  condition:
+  - after: '22:00:00'
+    before: 06:00:00
+    condition: time
+  id: '1503952455471'
+  trigger:
+  - entity_id: light.salon
+    platform: state
+    to: 'off'
+- action:
+  - alias: "Allumer Arbre Lumi\xE8re"
+    data:
+      entity_id: switch.arbre_lumiere_switch
+    service: switch.turn_on
+  alias: "Synchro Lumi\xE8re Salon (ON)"
+  condition:
+  - condition: state
+    entity_id: switch.arbre_lumiere_switch
+    state: 'off'
+  id: '1504014005858'
+  trigger:
+  - entity_id: light.meuble_tv
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - alias: "extinction Arbre lumi\xE8re"
+    data:
+      entity_id: switch.arbre_lumiere_switch
+    service: switch.turn_off
+  alias: "Synchro Lumi\xE8re Salon (OFF)"
+  condition:
+  - condition: state
+    entity_id: switch.arbre_lumiere_switch
+    state: 'on'
+  id: '1504511867023'
+  trigger:
+  - entity_id: light.meuble_tv
+    from: 'on'
+    platform: state
+    to: 'off'
+- action:
+  - data:
+      data:
+        entity_id: camera.salon
+        push:
+          category: ALARM
+      message: "Quelqu'un d'inconnu a \xE9t\xE9 vu"
+    service: notify.iosapp
+  alias: "[ALARME] [iOS] Notification pour d\xE9clencher alarme manuellement"
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.ha_alarm
+    state: '''armed_away'''
+  id: '1504688795740'
+  trigger:
+  - entity_id: binary_sensor.salon_someone_unknown
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      actionName: FIRE_ALARM
+    service: notify.iosapp
+  alias: "[ALARME] [iOS] Alarme d\xE9clench\xE9 manuellement"
+  condition: []
+  id: '1504689570980'
+  trigger:
+  - event_data:
+      message: Test
+    event_type: ios.notification_action_fired
+    platform: event
+- action:
+  - data:
+      entity_id: alarm_control_panel.ha_alarm
+    service: alarm_control_panel.alarm_disarm
+  alias: "[ALARME] [iOS] D\xE9sactiver alarme manuellement"
+  condition: []
+  id: '1504689743769'
+  trigger:
+  - event_data:
+      actionName: CANCEL_ALARM
+    event_type: ios.notification_action_fired
+    platform: event
+- action:
+  - data:
+      entity_id: group.current_weather_day
+      visible: 'False'
+    service: group.set_visibility
+  - data:
+      entity_id: group.current_weather_night
+      visible: 'True'
+    service: group.set_visibility
+  alias: "M\xE9t\xE9o Nuit"
+  hide_entity: false
+  condition:
+  - before: sunrise
+    before_offset: -03:00:00
+    condition: sun
+  - after: sunset
+    after_offset: -03:00:00
+    condition: sun
+  id: '1504704434001'
+  trigger:
+  - event: sunset
+    offset: -03:00:00
+    platform: sun
+  - event: start
+    platform: homeassistant
+- action:
+  - data:
+      entity_id: group.current_weather_day
+      visible: 'True'
+    service: group.set_visibility
+  - data:
+      entity_id: group.current_weather_night
+      visible: 'False'
+    service: group.set_visibility
+  alias: "M\xE9t\xE9o Jour"
+  hide_entity: false
+  condition:
+  - after: sunrise
+    after_offset: -03:00:00
+    before: sunset
+    before_offset: -03:00:00
+    condition: sun
+  id: meteo_jour
+  trigger:
+  - event: sunrise
+    offset: -03:00:00
+    platform: sun
+  - event: start
+    platform: homeassistant

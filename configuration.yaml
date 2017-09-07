@@ -11,8 +11,21 @@ homeassistant:
     longitude: !secret home_longitude
     elevation: 0
     packages: !include_dir_named packages
+    customize: !include customization.yaml
 
 config:
+
+http:
+    api_password: !secret api_password
+    base_url: !secret base_url
+    use_x_forwarded_for: True
+    trusted_networks:
+      - 127.0.0.1
+      - ::1
+      - 192.168.1.0/24
+      - 10.8.0.0/24
+    ip_ban_enabled: True
+    login_attempts_threshold: 3
 
 #Geofencing setup
 zone:
@@ -27,10 +40,43 @@ sun:
 
 recorder:
     purge_days: 10
-
+    include:
+        domains:
+          - automation
+          - binary_sensor
+          - sensor
+          - light
+          - device_tracker
+        entities:
+          - alarm_control_panel.ha_alarm
+    exclude:
+        entities:
+          - sensor.yr_symbol
+          - sensor.time
+          - sensor.pws_alerts
+          - sensor.pws_precip_1d
+          - sensor.pws_precip_1d_mm
+          - sensor.pws_temp_c
+          - sensor.pws_temp_high_1d_c
+          - sensor.pws_temp_high_record_c
+          - sensor.pws_temp_low_1d_c
+          - sensor.pws_temp_low_record_c
+          - sensor.pws_weather_1d_metric
+          - sensor.pws_weather_1n_metric
+          - sensor.pws_weather_2d_metric
+          - sensor.pws_weather_2n_metric
+          - sensor.pws_weather_3d_metric
+          - sensor.pws_weather_3n_metric
+          - sensor.pws_weather_4d_metric
+          - sensor.pws_weather_4n_metric
+          - sensor.pws_wind_1d_kph
+          - sensor.pws_wind_kph
 
 # Enables support for tracking state changes over time.
 history:
+    exclude:
+        domains:
+            automation
 
 logbook:
 
@@ -46,11 +92,61 @@ discovery:
 #Zeroconf/Avahi/Bonjour
 zeroconf:
 
+ios:
+    push:
+        categories:
+          - name: Alarm
+            identifier: 'ALARM'
+            actions:
+              - identifier: 'FIRE_ALARM'
+                title: 'Activer Alarme'
+                activationMode: 'background'
+                authenticationRequired: no
+                destructive: yes
+              - identifier: 'CANCEL_ALARM'
+                title: 'Désactiver Alarme'
+                activationMode: 'background'
+                authenticationRequired: no
+                destructive: yes
+
+#Notifier
+notify:
+  - platform: pushbullet
+    api_key: !secret pushbullet_api_key
+    name: pushbullet
+  - platform: ios
+    name: iOSApp
+
+#IFTTT
+ifttt:
+    key: !secret ifttt_key
+
+#Detect all device on network + my iCloud device + OwnTracks User (MQTT)
+device_tracker:
+  - platform: owntracks
+    max_gps_accuracy: 150
+    track_new_devices: no
+  - platform: asuswrt
+    host: !secret asuswrt_host
+    username: !secret asuswrt_username
+    password: !secret asuswrt_password
+
+proximity:
+    home:
+        tolerance: 50
+        devices:
+          - device_tracker.hugo_iphone_6s
+
 alarm_control_panel:
     platform: manual
     pending_time: 30
 
+emulated_hue:
+
 #Sensors
 sensor: !include sensors.yaml
 
+group: !include_dir_merge_named groups/
+
 automation: !include automations.yaml
+script: !include scripts.yaml

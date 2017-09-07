@@ -1,0 +1,33 @@
+harmony_activities:
+    name: Harmony Hub
+    entities:
+      - input_select.harmony
+
+current_weather_day:
+    name: Météo Actuelle
+    entities:
+      - sensor.pws_weather_1d_metric
+
+current_weather_night:
+    name: Météo Actuelle
+    entities:
+      - sensor.pws_weather_1n_metric
+
+home:
+    view: yes
+    entities:
+      - group.current_weather_day
+      - group.current_weather_night
+      - updater.updater
+      - sun.sun
+      - alarm_control_panel.ha_alarm
+      - sensor.time
+      - device_tracker.hugo_iphone_6s
+      - device_tracker.vanessa
+      - sensor.yr_symbol
+      - sensor.battery_iphone
+      - sensor.retour_maison
+      - sensor.uberx_time
+      - group.lumiere_piece
+      - group.harmony_activities
+      - cover.global_cover

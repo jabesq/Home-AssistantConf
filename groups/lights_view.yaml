@@ -1,0 +1,8 @@
+lights_view:
+    view: yes
+    icon: mdi:lightbulb-on-outline
+    entities:
+      - group.light_salon
+      - group.lumiere_couloir
+      - group.lumieres_chambre
+      - group.lumiere_chambre_enfant
