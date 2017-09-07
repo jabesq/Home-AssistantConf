@@ -1,0 +1,18 @@
+ip_group:
+    name: Adresses IP
+    entities:
+      - sensor.myipopendnscom
+      - sensor.duprasfr
+
+system_view:
+    view: yes
+    icon: mdi:chip
+    entities:
+      - group.ip_group
+      - group.system
+      - group.speedtest
+      - group.apc_ups
+      - zwave.aeotec_zw090_zstick_gen5_eu
+      - zwave.multisensor_entree
+      - zwave.arbre_lumiere
+      - zwave.remotec_zxt120eu

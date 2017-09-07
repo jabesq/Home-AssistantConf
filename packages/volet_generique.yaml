@@ -18,7 +18,7 @@ script:
           - service: cover.open_cover
             entity_id: cover.volet_salon
           - service: cover.open_cover
-            entity_id: cover.volet_chambre
+            entity_id: cover.volet_chambre_amis
           - service: cover.open_cover
             entity_id: cover.volet_cuisine
     fermer_volet:
@@ -27,7 +27,7 @@ script:
           - service: cover.close_cover
             entity_id: cover.volet_salon
           - service: cover.close_cover
-            entity_id: cover.volet_chambre
+            entity_id: cover.volet_chambre_amis
           - service: cover.close_cover
             entity_id: cover.volet_cuisine
     volet_stop:
@@ -36,6 +36,6 @@ script:
           - service: cover.stop_cover
             entity_id: cover.volet_salon
           - service: cover.stop_cover
-            entity_id: cover.volet_chambre
+            entity_id: cover.volet_chambre_amis
           - service: cover.stop_cover
             entity_id: cover.volet_cuisine

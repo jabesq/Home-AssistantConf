@@ -1,0 +1,38 @@
+light:
+    platform: hue
+    scan_interval: 10
+
+group:
+    lumiere_piece:
+        name: Lumière Pièces
+        entities:
+          - light.salon
+          - light.couloir
+          - light.chambre
+          - light.chambre_enfant
+          - light.terrasse
+
+    spots_salon:
+        name: Spots Salon
+        entities:
+          - light.spot_bibliotheque
+          - light.spot_entree
+          - light.spot_salon
+          - light.spot_salon_couloir
+
+    lumiere_couloir:
+        name: Spots Couloir
+        entities:
+          - light.spot_couloir_1
+          - light.spot_couloir_2
+    
+    lumieres_chambre:
+        name: Lumières Chambre
+        entities:
+          - light.lampe_de_chevet_hugo
+          - light.lampe_de_chevet_vanessa
+    
+    lumiere_chambre_enfant:
+        name: Lumière Chambre Enfant
+        entities:
+          - light.plafond_chambre_enfant

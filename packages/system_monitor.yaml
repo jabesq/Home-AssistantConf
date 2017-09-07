@@ -1,0 +1,17 @@
+sensor:
+  - platform: systemmonitor
+    resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_free
+    - type: processor_use
+    - type: last_boot
+
+group:
+    System:
+        name: System
+        entities:
+          - sensor.cpu_use
+          - sensor.disk_use_
+          - sensor.ram_free
+          - sensor.last_boot

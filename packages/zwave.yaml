@@ -1,22 +1,24 @@
 homeassistant:
     customize:
-        sensor.fibaro_system_fgwpef_wall_plug_gen5_alarm_level:
+        sensor.arbre_lumiere_alarm_level:
             hidden: true
-        sensor.fibaro_system_fgwpef_wall_plug_gen5_alarm_type:
+        sensor.arbre_lumiere_alarm_type:
             hidden: true
-        sensor.fibaro_system_fgwpef_wall_plug_gen5_exporting:
+        sensor.arbre_lumiere_exporting:
             hidden: true
-        sensor.fibaro_system_fgwpef_wall_plug_gen5_power_2:
+        sensor.arbre_lumiere_power_2:
             hidden: true
-        sensor.fibaro_system_fgwpef_wall_plug_gen5_power_management:
+        sensor.arbre_lumiere_power_management:
             hidden: true
-        sensor.fibaro_system_fgwpef_wall_plug_gen5_sourcenodeid:
+        sensor.arbre_lumiere_sourcenodeid:
             hidden: true
-        sensor.aeotec_zw100_multisensor_6_alarm_level:
+        sensor.multisensor_entree_alarm_level:
             hidden: true
-        sensor.aeotec_zw100_multisensor_6_alarm_type:
+        sensor.multisensor_entree_alarm_type:
             hidden: true
-        sensor.aeotec_zw100_multisensor_6_sourcenodeid:
+        sensor.multisensor_entree_sourcenodeid:
+            hidden: true
+        climate.remotec_zxt120eu_heating_1:
             hidden: true
         climate.remotec_zxt120eu_unused_4:
             hidden: true
@@ -28,3 +30,20 @@ zwave:
 
 climate:
   - platform: zwave
+
+group:
+    zw_multisensor_entree:
+        name: Multisensor Entrée
+        entities:
+          - binary_sensor.multisensor_entree_sensor
+          - sensor.multisensor_entree_temperature
+          - sensor.multisensor_entree_relative_humidity
+          - sensor.multisensor_entree_luminance
+          - sensor.multisensor_entree_ultraviolet
+          - sensor.multisensor_entree_burglar
+    zw_arbre_lumiere:
+        name: Arbre Lumière
+        entities:
+          - switch.arbre_lumiere_switch
+          - sensor.arbre_lumiere_power
+          - sensor.arbre_lumiere_energy

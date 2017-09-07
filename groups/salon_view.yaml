@@ -1,0 +1,22 @@
+light_salon:
+    name: Lumières Salon
+    entities:
+      - light.plafonnier_salon
+      - light.meuble_tv
+      - light.lampe_du_cube
+      - light.hue_go
+      - group.spots_salon
+      - switch.arbre_lumiere_switch
+      
+salon_view:
+    view: yes
+    icon: mdi:sofa
+    entities:
+      - cover.volet_salon
+      - group.netatmo_salon
+      - group.harmony_hub
+      - group.light_salon
+      - switch.interrupteur_salon_1
+      - switch.interrupteur_salon_2
+      - climate.remotec_zxt120eu_cooling_1
+      - media_player.apple_tv
