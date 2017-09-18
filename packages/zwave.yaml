@@ -19,7 +19,7 @@ homeassistant:
         sensor.multisensor_entree_sourcenodeid:
             hidden: true
         climate.remotec_zxt120eu_heating_1:
-            hidden: true
+            hidden: false
         climate.remotec_zxt120eu_unused_4:
             hidden: true
         climate.remotec_zxt120eu_unused_6:

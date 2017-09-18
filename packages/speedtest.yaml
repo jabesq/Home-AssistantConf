@@ -9,7 +9,12 @@ sensor:
       - ping
       - download
       - upload
-  
+
+  - platform: fastdotcom
+    minute:
+      - 10
+      - 40
+
   - platform: statistics
     entity_id: sensor.speedtest_download
     name: Stats Speedtest download
@@ -28,3 +33,4 @@ group:
           - sensor.speedtest_upload
           - sensor.stats_speedtest_download_mean
           - sensor.stats_speedtest_upload_mean
+          - sensor.fastcom_download

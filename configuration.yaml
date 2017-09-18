@@ -11,7 +11,7 @@ homeassistant:
     longitude: !secret home_longitude
     elevation: 0
     packages: !include_dir_named packages
-    customize: !include customization.yaml
+    customize: !include customize.yaml
 
 config:
 
@@ -49,6 +49,7 @@ recorder:
           - device_tracker
         entities:
           - alarm_control_panel.ha_alarm
+          - proximity.home
     exclude:
         entities:
           - sensor.yr_symbol

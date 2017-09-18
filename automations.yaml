@@ -224,12 +224,14 @@
   alias: "M\xE9t\xE9o Nuit"
   hide_entity: false
   condition:
-  - before: sunrise
-    before_offset: -03:00:00
-    condition: sun
-  - after: sunset
-    after_offset: -03:00:00
-    condition: sun
+    condition: or
+    conditions:
+    - before: sunrise
+      before_offset: -03:00:00
+      condition: sun
+    - after: sunset
+      after_offset: -03:00:00
+      condition: sun
   id: '1504704434001'
   trigger:
   - event: sunset
@@ -249,11 +251,14 @@
   alias: "M\xE9t\xE9o Jour"
   hide_entity: false
   condition:
-  - after: sunrise
-    after_offset: -03:00:00
-    before: sunset
-    before_offset: -03:00:00
-    condition: sun
+    condition: and
+    conditions:
+    - before: sunset
+      before_offset: -03:00:00
+      condition: sun
+    - after: sunrise
+      after_offset: -03:00:00
+      condition: sun
   id: meteo_jour
   trigger:
   - event: sunrise
@@ -261,3 +266,42 @@
     platform: sun
   - event: start
     platform: homeassistant
+- action:
+  - service: sensor.update_speedtest
+  - delay: 00:01:00
+  - data: {}
+    service: sensor.update_fastdotcom
+  - data:
+      entity_id: group.all_automations
+    service: homeassistant.turn_on
+  trigger:
+  - event: start
+    platform: homeassistant
+  alias: Boot
+  id: boot
+- action:
+  - alias: Ouverture volet Salon
+    data:
+      entity_id: cover.volet_salon
+    service: cover.open_cover
+  - delay: 00:00:30
+  - condition: template
+    value_template: '{{ states.sensor.multisensor_entree_luminance.state | float >
+      10 }}'
+  - data:
+      entity_id: light.salon
+    service: light.turn_off
+  alias: "Ouverture volet en journ\xE9e (Salon)"
+  condition:
+    condition: and
+    conditions:
+    - after: sunrise
+      condition: sun
+    - before: sunset
+      condition: sun
+  id: '1504888310936'
+  trigger:
+  - entity_id: light.salon
+    from: 'off'
+    platform: state
+    to: 'on'

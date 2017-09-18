@@ -1,0 +1,40 @@
+remote.apple_tv:
+  hidden: true
+sensor.uberx_price:
+  hidden: true
+sensor.myipopendnscom:
+  friendly_name: External IP
+  icon: mdi:ethernet
+sensor.duprasfr:
+  friendly_name: DynHost OVH
+  icon: mdi:web
+group.calendar:
+  hidden: false
+group.all_automations:
+  hidden: false
+group.all_lights:
+  hidden: true
+group.all_switches:
+  hidden: true
+group.all_scripts:
+  hidden: false
+group.all_covers:
+  hidden: false
+group.weather_view:
+  order: 1
+group.salon_view:
+  order: 2
+group.chambres_view:
+  order: 3
+group.cuisine_view:
+  order: 4
+group.lights_view:
+  order: 5
+group.system_view:
+  order: 6
+group.admin_view:
+  order: 7
+group.automation_view:
+  order: 8
+sensor.fastcom_download:
+  icon: mdi:flash
