@@ -13,11 +13,21 @@ current_weather_night:
     entities:
       - sensor.pws_weather_1n_metric
 
-home:
+all_media_player:
+    name: Médias
+    entities:
+      - media_player.apple_tv
+      - media_player.salon
+      - media_player.cuisine
+      - media_player.chambre
+
+#home:
+default_view:
     view: yes
     entities:
       - group.current_weather_day
       - group.current_weather_night
+      - group.all_media_player
       - updater.updater
       - sun.sun
       - alarm_control_panel.ha_alarm

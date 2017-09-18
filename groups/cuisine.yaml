@@ -1,0 +1,5 @@
+cuisine_view:
+    view: yes
+    icon: mdi:food-fork-drink
+    entities:
+      - media_player.cuisine

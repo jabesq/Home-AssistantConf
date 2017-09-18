@@ -19,4 +19,6 @@ salon_view:
       - switch.interrupteur_salon_1
       - switch.interrupteur_salon_2
       - climate.remotec_zxt120eu_cooling_1
+      - climate.remotec_zxt120eu_heating_1
       - media_player.apple_tv
+      - media_player.salon_view

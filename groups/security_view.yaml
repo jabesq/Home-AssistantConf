@@ -1,0 +1,12 @@
+capteur_security:
+    name: Détecteurs mouvement
+    entities:
+      - binary_sensor.multisensor_entree_sensor
+      - binary_sensor.salon__porte_entree_tag_open
+
+security_view:
+    view: yes
+    icon: mdi:security-home
+    entities:
+      - camera.salon
+      - group.capteur_security

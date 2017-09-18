@@ -4,6 +4,7 @@ chambres_view:
     entities:
       - group.lumieres_chambre
       - group.netatmo_chambre
+      - media_player.chambre
       - group.lumiere_chambre_enfant
       - group.netatmo_chambre_enfant
       - cover.volet_chambre_amis
