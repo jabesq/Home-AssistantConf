@@ -8,5 +8,6 @@ security_view:
     view: yes
     icon: mdi:security-home
     entities:
+      - alarm_control_panel.ha_alarm
       - camera.salon
       - group.capteur_security

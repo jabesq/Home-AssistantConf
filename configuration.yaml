@@ -47,9 +47,9 @@ recorder:
           - sensor
           - light
           - device_tracker
-        entities:
-          - alarm_control_panel.ha_alarm
-          - proximity.home
+          - alarm_control_panel
+          - proximity
+          - sun
     exclude:
         entities:
           - sensor.yr_symbol

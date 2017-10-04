@@ -27,7 +27,10 @@ default_view:
     entities:
       - group.current_weather_day
       - group.current_weather_night
-      - group.all_media_player
+      - media_player.apple_tv
+      - media_player.salon
+      - media_player.cuisine
+      - media_player.chambre
       - updater.updater
       - sun.sun
       - alarm_control_panel.ha_alarm
@@ -41,3 +44,4 @@ default_view:
       - group.lumiere_piece
       - group.harmony_activities
       - cover.global_cover
+      - camera.salon

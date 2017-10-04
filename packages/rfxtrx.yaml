@@ -1,9 +1,22 @@
+homeassistant:
+    customize:
+        switch.interrupteur_couloir:
+            homebridge_hidden: true
+        switch.interrupteur_cuisine:
+            homebridge_hidden: true
+        switch.interrupteur_salon_1:
+            homebridge_hidden: true
+        switch.interrupteur_salon_2:
+            homebridge_hidden: true
+        switch.switch_rfxcom:
+            homebridge_hidden: true
+
 rfxtrx:
     device: /dev/ttyUSB0
 
 switch:
     platform: rfxtrx
-    automatic_add: True
+    automatic_add: False
     devices:
         0b110001017d14de0a000070:
             name: switch RFXCom
@@ -28,4 +41,4 @@ cover:
 
 sensor:
 - platform: rfxtrx
-  automatic_add: True
+  automatic_add: False

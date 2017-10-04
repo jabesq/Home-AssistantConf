@@ -21,4 +21,4 @@ salon_view:
       - climate.remotec_zxt120eu_cooling_1
       - climate.remotec_zxt120eu_heating_1
       - media_player.apple_tv
-      - media_player.salon_view
+      - media_player.salon
