@@ -1,3 +1,14 @@
+homeassistant:
+    customize:
+        cover.volet_salon:
+            homebridge_cover_type: rollershutter
+        cover.volet_chambre_amis:
+            homebridge_cover_type: rollershutter
+        cover.volet_cuisine:
+            homebridge_cover_type: rollershutter
+        cover.global_cover:
+            homebridge_hidden: true
+
 cover:
   - platform: template
     covers:

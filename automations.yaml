@@ -305,3 +305,18 @@
     from: 'off'
     platform: state
     to: 'on'
+- action:
+  - alias: "Extinction lumi\xE8re automatique"
+    data:
+      entity_id: light.salon
+    service: light.turn_off
+  alias: "Lumi\xE8re du jour suffisante dans salon"
+  condition:
+  - condition: state
+    entity_id: light.salon
+    state: 'on'
+  id: '1506437908730'
+  trigger:
+  - platform: template
+    value_template: '{{ states.sensor.multisensor_entree_luminance.state | float >
+      20 }}'

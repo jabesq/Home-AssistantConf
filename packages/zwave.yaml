@@ -1,5 +1,7 @@
 homeassistant:
     customize:
+        binary_sensor.multisensor_entree_sensor:
+            device_class: motion
         sensor.arbre_lumiere_alarm_level:
             hidden: true
         sensor.arbre_lumiere_alarm_type:
