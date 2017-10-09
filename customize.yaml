@@ -38,3 +38,6 @@ group.automation_view:
   order: 8
 sensor.fastcom_download:
   icon: mdi:flash
+sensor.capteur_motion_cuisine:
+  hidden: true
+  homebridge_hidden: true

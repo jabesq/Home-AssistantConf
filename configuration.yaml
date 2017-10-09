@@ -146,6 +146,7 @@ emulated_hue:
 
 #Sensors
 sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
 
 group: !include_dir_merge_named groups/
 
