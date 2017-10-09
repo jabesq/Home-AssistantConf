@@ -41,7 +41,7 @@ input_boolean:
         icon: mdi:playstation
     switch:
         name: Jouer à la Switch
-        icon: mdi:tablet
+        icon: mdi:nintendo-switch
     television:
         name: Regarder la TV
         icon: mdi:television

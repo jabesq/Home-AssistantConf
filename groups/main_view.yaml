@@ -21,8 +21,8 @@ all_media_player:
       - media_player.cuisine
       - media_player.chambre
 
-#home:
-default_view:
+home:
+#default_view:
     view: yes
     entities:
       - group.current_weather_day
