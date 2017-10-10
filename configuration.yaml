@@ -39,7 +39,8 @@ zone:
 sun:
 
 recorder:
-    purge_days: 10
+    purge_interval: 2
+    purge_keep_days: 10
     include:
         domains:
           - automation
@@ -143,6 +144,9 @@ alarm_control_panel:
     pending_time: 30
 
 emulated_hue:
+
+input_boolean:
+    lumiere_entree_auto:
 
 #Sensors
 sensor: !include sensors.yaml
