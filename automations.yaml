@@ -60,8 +60,10 @@
     entity_id: group.all_devices
     state: not_home
   action:
-    service: alarm_control_panel.alarm_arm_away
+  - service: alarm_control_panel.alarm_arm_away
     entity_id: alarm_control_panel.ha_alarm
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.lumiere_entree_auto
 - alias: 'Rapport Activite Elsys #work'
   id: erp_elsys
   hide_entity: true
@@ -323,3 +325,55 @@
   - platform: template
     value_template: '{{ states.sensor.multisensor_entree_luminance.state | float >
       20 }}'
+- action:
+  - alias: "Lumi\xE8re Bienvenue"
+    data:
+      brightness: 254
+      entity_id: light.spot_entree
+      rgb_color:
+      - 255
+      - 195
+      - 98
+    service: light.turn_on
+  - delay: 00:00:30
+  - condition: or
+    conditions:
+    - condition: template
+      value_template: '{{ is_state_attr(''device_tracker.hugo_iphone_6s'', ''source_type'',
+        ''gps'')  }}'
+    - condition: state
+      entity_id: device_tracker.vanessa
+      state: not_home
+  - data:
+      entity_id: light.spot_entree
+    service: light.turn_off
+  alias: "Lumi\xE8re entr\xE9e - Bienvenue"
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.lumiere_entree_auto
+      state: 'on'
+    - condition: template
+      value_template: '{{ states(''sensor.multisensor_entree_luminance'') | float
+        < 10  }}'
+  id: '1507645975510'
+  trigger:
+  - entity_id: binary_sensor.multisensor_entree_sensor
+    from: 'off'
+    platform: state
+    to: 'on'
+- action:
+  - data:
+      entity_id: input_boolean.lumiere_entree_auto
+    service: input_boolean.turn_off
+  alias: "D\xE9sactivation lumi\xE8re bienvenue"
+  condition: []
+  id: '1507646170735'
+  trigger:
+  - entity_id: device_tracker.vanessa
+    platform: state
+    to: home
+  - platform: template
+    value_template: '{{ is_state_attr(''device_tracker.hugo_iphone_6s'', ''source_type'',
+      ''router'')  }}'

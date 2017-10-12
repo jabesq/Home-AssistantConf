@@ -51,6 +51,7 @@ recorder:
           - alarm_control_panel
           - proximity
           - sun
+          - input_boolean
     exclude:
         entities:
           - sensor.yr_symbol

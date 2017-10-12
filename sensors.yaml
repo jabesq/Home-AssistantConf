@@ -19,10 +19,10 @@
       lux_hue_cuisine:
           friendly_name: Luminosité Cuisine (Hue Motion)
           unit_of_measurement: 'lux'
-          value_template: '{{ float(10**((states.sensor.capteur_motion_cuisine.attributes.light_level-1)/10000)) | round(2) }}'
+          value_template: '{{ float(10**((states.sensor.capteur_motion_cuisine.attributes.light_level-1)/10000)) | round(0) }}'
 - platform: template
   sensors:
       temp_hue_cuisine:
           friendly_name: Température Cuisine (Hue Motion)
           unit_of_measurement: '°C'
-          value_template: '{{ states.sensor.capteur_motion_cuisine.attributes.temperature| round(1) }}'
+          value_template: '{{ states.sensor.capteur_motion_cuisine.attributes.temperature| round(0) }}'

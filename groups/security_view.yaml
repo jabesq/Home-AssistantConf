@@ -2,7 +2,7 @@ capteur_security:
     name: Détecteurs mouvement
     entities:
       - binary_sensor.multisensor_entree_sensor
-      - binary_sensor.salon__porte_entree_tag_open
+      - binary_sensor.motion_hue_cuisine
 
 security_view:
     view: yes
