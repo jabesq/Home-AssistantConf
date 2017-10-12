@@ -26,5 +26,6 @@ pyozw.sqlite
 html5_push_registrations.conf
 ip_bans.yaml
 /icloud/*
+/custom_components/*
 google_calendars.yaml
 emulated_hue_ids.json
