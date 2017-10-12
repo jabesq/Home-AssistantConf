@@ -26,6 +26,7 @@ group:
           - input_boolean.ps4
           - input_boolean.switch
           - input_boolean.music
+          - input_boolean.chromecast
           - input_boolean.television
 
 #These inputs are mainly used as script flags
@@ -45,7 +46,9 @@ input_boolean:
     television:
         name: Regarder la TV
         icon: mdi:television
-
+    chromecast:
+        name: Regarder Chromecast
+        icon: mdi:cast
 
 input_select:
     harmony:
@@ -56,10 +59,14 @@ input_select:
           - Jouer à PS4
           - Jouer a la Switch
           - Écouter de la musique
+          - Regarder Chromecast
           - Regarder la TV
           - PowerOff
 
 automation:
+###############################################################################
+# Global
+###############################################################################
   - alias: Remote external update living room
     hide_entity: true
     trigger:
@@ -102,6 +109,9 @@ automation:
     - platform: state
       entity_id: input_boolean.television
       to: 'off'
+    - platform: state
+      entity_id: input_boolean.chromecast
+      to: 'off'
     condition:
       condition: and
       conditions:
@@ -121,12 +131,18 @@ automation:
         entity_id: input_boolean.television
         state: 'off'
       - condition: state
+        entity_id: input_boolean.chromecast
+        state: 'off'
+      - condition: state
         entity_id: remote.harmony_hub
         state: 'on'
     action:
       service: remote.turn_off
       data:
         entity_id: remote.harmony_hub
+###############################################################################
+# PlayStation
+###############################################################################
   - alias: "Jouer PS4 demarr\xE9 depuis Harmony"
     hide_entity: true
     trigger:
@@ -176,6 +192,9 @@ automation:
       data:
         activity: "Jouer \xE0 PS4"
         entity_id: remote.harmony_hub
+###############################################################################
+# Nintendo Switch
+###############################################################################
   - alias: "Jouer Switch demarr\xE9 depuis Harmony"
     hide_entity: true
     trigger:
@@ -225,6 +244,9 @@ automation:
       data:
         activity: Jouer a la Switch
         entity_id: remote.harmony_hub
+###############################################################################
+# TV
+###############################################################################
   - alias: "Regarder TV demarr\xE9 depuis Harmony"
     hide_entity: true
     trigger:
@@ -274,6 +296,9 @@ automation:
       data:
         activity: Regarder la TV
         entity_id: remote.harmony_hub
+###############################################################################
+# Apple TV
+###############################################################################
   - alias: "Regarder Apple TV demarr\xE9 depuis Harmony"
     hide_entity: true
     trigger:
@@ -328,6 +353,9 @@ automation:
       data:
         activity: Regarder Apple TV
         entity_id: remote.harmony_hub
+###############################################################################
+# Sonos
+###############################################################################
   - alias: "Ecouter musique demarr\xE9 depuis Harmony"
     hide_entity: true
     trigger:
@@ -376,4 +404,58 @@ automation:
       service: remote.turn_on
       data:
         activity: "\xC9couter de la musique"
+        entity_id: remote.harmony_hub
+###############################################################################
+# Chromecast
+###############################################################################
+  - alias: "Regarder Chromecast demarr\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.attributes.current_activity == "Regarder Chromecast" }}'
+      - condition: state
+        entity_id: input_boolean.chromecast
+        state: 'off'
+    action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.chromecast
+    - service: media_player.turn_on
+      entity_id: media_player.salon_chromecast
+  - alias: "Regarder Chromecast arr\xEAt\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.attributes.current_activity != "Regarder Chromecast" }}'
+      - condition: state
+        entity_id: input_boolean.chromecast
+        state: 'on'
+    action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.chromecast
+    - service: media_player.turn_off
+      entity_id: media_player.salon_chromecast
+  - alias: "D\xE9marrer Regarder Chromecast"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: input_boolean.chromecast
+      to: 'on'
+    action:
+    - service: media_player.turn_on
+      entity_id: media_player.salon_chromecast
+    - condition: template
+      value_template: '{{ states.remote.harmony_hub.attributes.current_activity != "Regarder Chromecast" }}'
+    - service: remote.turn_on
+      data:
+        activity: Regarder Chromecast
         entity_id: remote.harmony_hub
