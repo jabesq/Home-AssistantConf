@@ -1,0 +1,27 @@
+### Chromecast/Harmony Sync ###
+- alias: "Chromecast => démarre ampli"
+  hide_entity: true
+  trigger:
+      platform: state
+      entity_id: media_player.salon_chromecast
+      from: 'off'
+      to: 'on'
+  action:
+      service: remote.turn_on
+      data:
+          activity: 'Regarder Chromecast'
+          entity_id: remote.salon
+
+- alias: "Chromecast => stop ampli"
+  hide_entity: true
+  trigger:
+      platform: state
+      entity_id: media_player.salon_chromecast
+      to: 'off'
+  condition:
+      condition: template
+      value_template: '{{ is_state("sensor.harmony_salon", "Regarder Chromecast") }}'
+  action:
+      service: remote.turn_off
+      data:
+          entity_id: remote.salon

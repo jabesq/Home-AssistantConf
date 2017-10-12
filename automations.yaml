@@ -52,6 +52,7 @@
     service: alarm_control_panel.alarm_disarm
 - alias: Restart alarm if away
   hide_entity: true
+  id: boot_away
   trigger:
     platform: homeassistant
     event: start
@@ -138,7 +139,7 @@
   - after: '22:00:00'
     before: 06:00:00
     condition: time
-  id: '1503952455471'
+  id: 'bed_time'
   trigger:
   - entity_id: light.salon
     platform: state
@@ -153,7 +154,7 @@
   - condition: state
     entity_id: switch.arbre_lumiere_switch
     state: 'off'
-  id: '1504014005858'
+  id: 'on_arbre_lumière'
   trigger:
   - entity_id: light.meuble_tv
     from: 'off'
@@ -169,7 +170,7 @@
   - condition: state
     entity_id: switch.arbre_lumiere_switch
     state: 'on'
-  id: '1504511867023'
+  id: 'off_arbre_lumière'
   trigger:
   - entity_id: light.meuble_tv
     from: 'on'
@@ -188,7 +189,7 @@
   - condition: state
     entity_id: alarm_control_panel.ha_alarm
     state: '''armed_away'''
-  id: '1504688795740'
+  id: 'alarm_unknown'
   trigger:
   - entity_id: binary_sensor.salon_someone_unknown
     platform: state
@@ -199,7 +200,7 @@
     service: notify.iosapp
   alias: "[ALARME] [iOS] Alarme d\xE9clench\xE9 manuellement"
   condition: []
-  id: '1504689570980'
+  id: 'alarm_manual_trigger'
   trigger:
   - event_data:
       message: Test
@@ -211,7 +212,7 @@
     service: alarm_control_panel.alarm_disarm
   alias: "[ALARME] [iOS] D\xE9sactiver alarme manuellement"
   condition: []
-  id: '1504689743769'
+  id: 'alarm_manual_disable'
   trigger:
   - event_data:
       actionName: CANCEL_ALARM
@@ -289,13 +290,6 @@
     data:
       entity_id: cover.volet_salon
     service: cover.open_cover
-  - delay: 00:00:30
-  - condition: template
-    value_template: '{{ states.sensor.multisensor_entree_luminance.state | float >
-      10 }}'
-  - data:
-      entity_id: light.salon
-    service: light.turn_off
   alias: "Ouverture volet en journ\xE9e (Salon)"
   condition:
     condition: and
