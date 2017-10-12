@@ -41,3 +41,9 @@ sensor.fastcom_download:
 sensor.capteur_motion_cuisine:
   hidden: true
   homebridge_hidden: true
+script.volet_stop:
+  hidden: true
+script.fermer_volet:
+  hidden: true
+script.ouvrir_volet:
+  hidden: true
