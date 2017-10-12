@@ -6,3 +6,4 @@ lights_view:
       - group.lumiere_couloir
       - group.lumieres_chambre
       - group.lumiere_chambre_enfant
+      - group.spots_salon

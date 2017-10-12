@@ -29,6 +29,7 @@ home:
       - group.current_weather_night
       - media_player.apple_tv
       - media_player.salon
+      - media_player.salon_chromecast
       - media_player.cuisine
       - media_player.chambre
       - updater.updater

@@ -22,3 +22,4 @@ salon_view:
       - climate.remotec_zxt120eu_heating_1
       - media_player.apple_tv
       - media_player.salon
+      - media_player.salon_chromecast
