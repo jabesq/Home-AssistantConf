@@ -368,6 +368,8 @@
   - entity_id: device_tracker.vanessa
     platform: state
     to: home
+    for:
+        minutes: 5
   - platform: template
     value_template: '{{ is_state_attr(''device_tracker.hugo_iphone_6s'', ''source_type'',
       ''router'')  }}'
