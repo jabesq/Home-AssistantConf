@@ -12,6 +12,8 @@ system_view:
       - group.system
       - group.speedtest
       - group.apc_ups
+      - group.neato_botvac
+      - camera.ganondorf_cleaning_map
       - zwave.aeotec_zw090_zstick_gen5_eu
       - zwave.multisensor_entree
       - zwave.arbre_lumiere

@@ -7,4 +7,5 @@ chambres_view:
       - media_player.chambre
       - group.lumiere_chambre_enfant
       - group.netatmo_chambre_enfant
+      - group.lumiere_chambre_ami
       - cover.volet_chambre_amis

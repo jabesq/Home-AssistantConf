@@ -1,0 +1,67 @@
+neato:
+    username: !secret neato_username
+    password: !secret neato_password
+
+input_boolean:
+    neato_weekend:
+
+group:
+    neato_botvac:
+        name: Neato
+        entities:
+          - switch.ganondorf_clean
+          - switch.ganondorf_schedule
+          - sensor.ganondorf_status
+          - sensor.ganondorf_battery
+
+automation:
+  ### Neato Connected automations for weekend days ###
+  - alias: "Démarre Neato Connected (Weekend)"
+    hide_entity: true
+    trigger:
+        platform: state
+        entity_id: group.all_devices
+        from: "home"
+        to: "not_home"
+    condition:
+        condition: and
+        conditions:
+          - condition: time
+            after: '10:00:00'
+            before: '19:00:00'
+            weekday:
+              - sat
+              - sun
+          - condition: state
+            entity_id: input_boolean.neato_weekend
+            state: 'off'
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.neato_weekend
+      - service: switch.turn_on
+        entity_id: switch.ganondorf_clean
+
+  - alias: "Neato démarré manuellement (Weekend)"
+    hide_entity: true
+    trigger:
+        platform: state
+        entity_id: switch.ganondorf_clean
+        from: 'off'
+        to: 'on'
+    condition:
+        condition: time
+        weekday:
+          - sat
+          - sun
+    action:
+        service: input_boolean.turn_on
+        entity_id: input_boolean.neato_weekend
+
+  - alias: "Reset Journalier (Neato)"
+    hide_entity: true
+    trigger:
+        platform: time
+        at: '00:00:00'
+    action:
+        service: input_boolean.turn_off
+        entity_id: input_boolean.neato_weekend

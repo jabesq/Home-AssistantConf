@@ -10,6 +10,7 @@ group:
           - light.couloir
           - light.chambre
           - light.chambre_enfant
+          - light.chambre_amis
           - light.terrasse
 
     spots_salon:
@@ -29,6 +30,7 @@ group:
     lumieres_chambre:
         name: Lumières Chambre
         entities:
+          - light.plafond_chambre
           - light.lampe_de_chevet_hugo
           - light.lampe_de_chevet_vanessa
     
@@ -36,3 +38,8 @@ group:
         name: Lumière Chambre Enfant
         entities:
           - light.plafond_chambre_enfant
+
+    lumiere_chambre_ami:
+        name: Lumière Chambre Ami
+        entities:
+          - light.lampe_chambre_damis
