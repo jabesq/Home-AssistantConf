@@ -62,7 +62,9 @@ input_select:
           - Regarder Chromecast
           - Regarder la TV
           - PowerOff
-
+###############################################################################
+# Automations
+###############################################################################
 automation:
 ###############################################################################
 # Global
@@ -353,6 +355,18 @@ automation:
       data:
         activity: Regarder Apple TV
         entity_id: remote.harmony_hub
+  - alias: "Synchro AppleTV mediaplayer <=> Harmony au boot"
+    hide_entity: true
+    trigger:
+        event: start
+        platform: homeassistant
+    condition:
+        condition: template
+        value_template: '{{ states.remote.harmony_hub.attributes.current_activity != "Regarder
+          Apple TV" }}'
+    action:
+        service: media_player.turn_off
+        entity_id: media_player.appletv
 ###############################################################################
 # Sonos
 ###############################################################################
@@ -459,3 +473,43 @@ automation:
       data:
         activity: Regarder Chromecast
         entity_id: remote.harmony_hub
+
+###############################################################################
+# Set states after restart
+###############################################################################
+  - alias: "Get Current Harmony state (appleTV)"
+    hide_entity: true
+    trigger:
+        platform: homeassistant
+        event: start
+    condition:
+        condition: template
+        value_template: '{{ not is_state("sensor.harmony_salon", "PowerOff") }}'
+    action:
+        service: input_boolean.turn_on
+        data_template:
+            entity_id: >
+              {% if is_state("sensor.harmony_salon", "Regarder la TV") %}
+                  input_boolean.television
+              {% elif is_state("sensor.harmony_salon", "Jouer à PS4") %}
+                  input_boolean.ps4
+              {% elif is_state("sensor.harmony_salon", "Regarder Apple TV") %}
+                  input_boolean.appletv
+              {% elif is_state("sensor.harmony_salon", "Écouter de la musique") %}
+                  input_boolean.music
+              {% elif is_state("sensor.harmony_salon", "Jouer a la Switch") %}
+                  input_boolean.switch
+              {% endif %}
+
+  - alias: Harmony Set Input Select On Start
+    hide_entity: true
+    trigger:
+        platform: homeassistant
+        event: start
+    action:
+      - delay:
+          seconds: 30
+      - service: input_select.select_option
+        data_template:
+            entity_id: input_select.harmony
+            option: '{{ states.remote.salon.attributes.current_activity }}'

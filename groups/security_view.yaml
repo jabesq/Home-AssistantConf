@@ -11,3 +11,4 @@ security_view:
       - alarm_control_panel.ha_alarm
       - camera.salon
       - group.capteur_security
+      - group.welcome_salon_binary_sensors

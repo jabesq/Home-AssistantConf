@@ -56,3 +56,10 @@ group:
           - sensor.netatmo_chambre_enfant_temperature
           - sensor.netatmo_chambre_enfant_co2
           - sensor.netatmo_chambre_enfant_humidity
+
+    welcome_salon_binary_sensors:
+        name: Netatmo Welcome
+        entities:
+          - binary_sensor.salon_motion
+          - binary_sensor.salon_someone_known
+          - binary_sensor.salon_someone_unknown
