@@ -9,10 +9,8 @@ group:
     neato_botvac:
         name: Neato
         entities:
-          - switch.ganondorf_clean
+          - vacuum.ganondorf
           - switch.ganondorf_schedule
-          - sensor.ganondorf_status
-          - sensor.ganondorf_battery
 
 automation:
   ### Neato Connected automations for weekend days ###
