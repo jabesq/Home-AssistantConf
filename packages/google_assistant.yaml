@@ -1,0 +1,7 @@
+google_assistant:
+    project_id: home-assistant-dupras-4ff84
+    client_id: !secret google_assistant_client_id
+    access_token: !secret google_assistant_token
+    exposed_domains:
+      - switch
+      - cover
