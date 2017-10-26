@@ -11,7 +11,7 @@ group:
     System:
         name: System
         entities:
-          - sensor.cpu_use
-          - sensor.disk_use_
-          - sensor.ram_free
+          - sensor.cpu_used
+          - sensor.disk_used_
+          - sensor.ram_available
           - sensor.last_boot
