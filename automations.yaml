@@ -36,7 +36,7 @@
   - data:
       entity_id: input_boolean.lumiere_entree_auto
     service: input_boolean.turn_on
-- alias: "Appartement occup\xE9"
+- alias: Appartement occupé
   id: full_house
   hide_entity: true
   trigger:
@@ -78,7 +78,7 @@
   action:
     service: notify.pushbullet
     data:
-      message: "Rapport Activit\xE9 Elsys"
+      message: Rapport Activité Elsys
       title: ERP
       data:
         url: https://portail.advans-group.com/ActivityReport
@@ -117,7 +117,7 @@
       title: Batterie iPhone
     service: notify.pushbullet
 - action:
-  - alias: "extinction Arbre lumi\xE8re"
+  - alias: extinction Arbre lumière
     data:
       entity_id: switch.arbre_lumiere_switch
     service: switch.turn_off
@@ -139,38 +139,45 @@
   - after: '22:00:00'
     before: 06:00:00
     condition: time
-  id: 'bed_time'
+  id: bed_time
   trigger:
   - entity_id: light.salon
     platform: state
     to: 'off'
 - action:
-  - alias: "Allumer Arbre Lumi\xE8re"
+  - alias: Allumer Arbre Lumière
     data:
       entity_id: switch.arbre_lumiere_switch
     service: switch.turn_on
-  alias: "Synchro Lumi\xE8re Salon (ON)"
+  - data:
+      entity_id: switch.guirlande_noel
+    service: switch.turn_on
+  alias: Synchro Lumière Salon (ON)
   condition:
   - condition: state
     entity_id: switch.arbre_lumiere_switch
     state: 'off'
-  id: 'on_arbre_lumière'
+  id: on_arbre_lumière
   trigger:
   - entity_id: light.meuble_tv
     from: 'off'
     platform: state
     to: 'on'
 - action:
-  - alias: "extinction Arbre lumi\xE8re"
+  - delay: 00:00:10
+  - alias: extinction Arbre lumière
     data:
       entity_id: switch.arbre_lumiere_switch
     service: switch.turn_off
-  alias: "Synchro Lumi\xE8re Salon (OFF)"
+  - data:
+      entity_id: switch.guirlande_noel
+    service: switch.turn_off
+  alias: Synchro Lumière Salon (OFF)
   condition:
   - condition: state
     entity_id: switch.arbre_lumiere_switch
     state: 'on'
-  id: 'off_arbre_lumière'
+  id: off_arbre_lumière
   trigger:
   - entity_id: light.meuble_tv
     from: 'on'
@@ -182,14 +189,14 @@
         entity_id: camera.salon
         push:
           category: ALARM
-      message: "Quelqu'un d'inconnu a \xE9t\xE9 vu"
+      message: Quelqu'un d'inconnu a été vu
     service: notify.iosapp
-  alias: "[ALARME] [iOS] Notification pour d\xE9clencher alarme manuellement"
+  alias: '[ALARME] [iOS] Notification pour déclencher alarme manuellement'
   condition:
   - condition: state
     entity_id: alarm_control_panel.ha_alarm
     state: '''armed_away'''
-  id: 'alarm_unknown'
+  id: alarm_unknown
   trigger:
   - entity_id: binary_sensor.salon_someone_unknown
     platform: state
@@ -198,9 +205,9 @@
   - data:
       actionName: FIRE_ALARM
     service: notify.iosapp
-  alias: "[ALARME] [iOS] Alarme d\xE9clench\xE9 manuellement"
+  alias: '[ALARME] [iOS] Alarme déclenché manuellement'
   condition: []
-  id: 'alarm_manual_trigger'
+  id: alarm_manual_trigger
   trigger:
   - event_data:
       message: Test
@@ -210,9 +217,9 @@
   - data:
       entity_id: alarm_control_panel.ha_alarm
     service: alarm_control_panel.alarm_disarm
-  alias: "[ALARME] [iOS] D\xE9sactiver alarme manuellement"
+  alias: '[ALARME] [iOS] Désactiver alarme manuellement'
   condition: []
-  id: 'alarm_manual_disable'
+  id: alarm_manual_disable
   trigger:
   - event_data:
       actionName: CANCEL_ALARM
@@ -227,7 +234,7 @@
       entity_id: group.current_weather_night
       visible: 'True'
     service: group.set_visibility
-  alias: "M\xE9t\xE9o Nuit"
+  alias: Météo Nuit
   hide_entity: false
   condition:
     condition: or
@@ -254,7 +261,7 @@
       entity_id: group.current_weather_night
       visible: 'False'
     service: group.set_visibility
-  alias: "M\xE9t\xE9o Jour"
+  alias: Météo Jour
   hide_entity: false
   condition:
     condition: and
@@ -290,26 +297,31 @@
     data:
       entity_id: cover.volet_salon
     service: cover.open_cover
-  alias: "Ouverture volet en journ\xE9e (Salon)"
+  alias: Ouverture volet en journée (Salon)
   condition:
-    condition: and
+  - condition: and
     conditions:
     - after: sunrise
       condition: sun
     - before: sunset
       condition: sun
+    - condition: state
+      entity_id: light.salon
+      state: 'on'
   id: '1504888310936'
   trigger:
   - entity_id: light.salon
     from: 'off'
     platform: state
     to: 'on'
+  - event: sunrise
+    platform: sun
 - action:
-  - alias: "Extinction lumi\xE8re automatique"
+  - alias: Extinction lumière automatique
     data:
       entity_id: light.salon
     service: light.turn_off
-  alias: "Lumi\xE8re du jour suffisante dans salon"
+  alias: Lumière du jour suffisante dans salon
   condition:
   - condition: state
     entity_id: light.salon
@@ -320,7 +332,7 @@
     value_template: '{{ states.sensor.multisensor_entree_luminance.state | float >
       20 }}'
 - action:
-  - alias: "Lumi\xE8re Bienvenue"
+  - alias: Lumière Bienvenue
     data:
       brightness: 254
       entity_id: light.spot_entree
@@ -341,7 +353,7 @@
   - data:
       entity_id: light.spot_entree
     service: light.turn_off
-  alias: "Lumi\xE8re entr\xE9e - Bienvenue"
+  alias: Lumière entrée - Bienvenue
   condition:
   - condition: and
     conditions:
@@ -361,7 +373,7 @@
   - data:
       entity_id: input_boolean.lumiere_entree_auto
     service: input_boolean.turn_off
-  alias: "D\xE9sactivation lumi\xE8re bienvenue"
+  alias: Désactivation lumière bienvenue
   condition: []
   id: '1507646170735'
   trigger:
@@ -369,7 +381,7 @@
     platform: state
     to: home
     for:
-        minutes: 5
+      minutes: 5
   - platform: template
     value_template: '{{ is_state_attr(''device_tracker.hugo_iphone_6s'', ''source_type'',
       ''router'')  }}'

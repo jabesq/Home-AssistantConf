@@ -49,3 +49,17 @@ group:
           - switch.arbre_lumiere_switch
           - sensor.arbre_lumiere_power
           - sensor.arbre_lumiere_energy
+    zw_detecteur_inondation:
+        name: Détecteur Inondation
+        entities:
+          - binary_sensor.detecteur_inondation_sensor
+          - sensor.detecteur_inondation_temperature
+          - sensor.detecteur_inondation_flood
+          - sensor.detecteur_inondation_flood_2
+          - sensor.detecteur_inondation_general
+    zw_prise_machine_laver:
+        name: Machine à Laver
+        entities:
+          - switch.machine_a_laver_switch
+          - sensor.machine_a_laver_energy
+          - sensor.machine_a_laver_power

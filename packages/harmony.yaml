@@ -438,8 +438,6 @@ automation:
     action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.chromecast
-    - service: media_player.turn_on
-      entity_id: media_player.salon_chromecast
   - alias: "Regarder Chromecast arr\xEAt\xE9 depuis Harmony"
     hide_entity: true
     trigger:
@@ -456,8 +454,6 @@ automation:
     action:
     - service: input_boolean.turn_off
       entity_id: input_boolean.chromecast
-    - service: media_player.turn_off
-      entity_id: media_player.salon_chromecast
   - alias: "D\xE9marrer Regarder Chromecast"
     hide_entity: true
     trigger:
@@ -465,8 +461,6 @@ automation:
       entity_id: input_boolean.chromecast
       to: 'on'
     action:
-    - service: media_player.turn_on
-      entity_id: media_player.salon_chromecast
     - condition: template
       value_template: '{{ states.remote.harmony_hub.attributes.current_activity != "Regarder Chromecast" }}'
     - service: remote.turn_on
