@@ -11,11 +11,38 @@ sensor.arbre_lumiere_power:
   ignored: true
   polling_intensity: 0
 sensor.arbre_lumiere_alarm_level:
-  ignored: false
+  ignored: true
   polling_intensity: 0
 sensor.multisensor_entree_sourcenodeid:
   ignored: true
   polling_intensity: 0
 sensor.arbre_lumiere_exporting:
+  ignored: true
+  polling_intensity: 0
+binary_sensor.multisensor_entree_sensor:
+  ignored: false
+  polling_intensity: 60
+sensor.detecteur_inondation_alarm_level:
+  ignored: true
+  polling_intensity: 0
+sensor.detecteur_inondation_alarm_type:
+  ignored: true
+  polling_intensity: 0
+sensor.detecteur_inondation_sourcenodeid:
+  ignored: true
+  polling_intensity: 0
+sensor.machine_a_laver_alarm_level:
+  ignored: true
+  polling_intensity: 0
+sensor.machine_a_laver_alarm_type:
+  ignored: true
+  polling_intensity: 0
+sensor.machine_a_laver_exporting:
+  ignored: true
+  polling_intensity: 0
+sensor.machine_a_laver_sourcenodeid:
+  ignored: true
+  polling_intensity: 0
+switch.machine_a_laver_switch:
   ignored: true
   polling_intensity: 0
