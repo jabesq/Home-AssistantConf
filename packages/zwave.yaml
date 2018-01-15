@@ -57,6 +57,7 @@ group:
           - sensor.detecteur_inondation_flood
           - sensor.detecteur_inondation_flood_2
           - sensor.detecteur_inondation_general
+          - sensor.detecteur_inondation_burglar
     zw_prise_machine_laver:
         name: Machine à Laver
         entities:

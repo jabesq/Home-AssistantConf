@@ -4,8 +4,6 @@
           friendly_name: 'Mouvement Cuisine (Hue Motion)'
           device_class: motion
           value_template: "{{ is_state('sensor.capteur_motion_cuisine', 'on') }}"
-          entity_id:
-            - sensor.capteur_motion_cuisine
           delay_off: 00:01:00
 
 - platform: template
@@ -13,29 +11,21 @@
       hue_tap_salon_btn1:
           friendly_name: 'Hue Tap Bouton 1'
           value_template: "{{ is_state('sensor.hue_tap_switch_1', '1_click') }}"
-          entity_id:
-            - sensor.hue_tap_switch_1
 
 - platform: template
   sensors:
       hue_tap_salon_btn2:
           friendly_name: 'Hue Tap Bouton 2'
           value_template: "{{ is_state('sensor.hue_tap_switch_1', '2_click') }}"
-          entity_id:
-            - sensor.hue_tap_switch_1
 
 - platform: template
   sensors:
       hue_tap_salon_btn3:
           friendly_name: 'Hue Tap Bouton 3'
           value_template: "{{ is_state('sensor.hue_tap_switch_1', '3_click') }}"
-          entity_id:
-            - sensor.hue_tap_switch_1
 
 - platform: template
   sensors:
       hue_tap_salon_btn4:
           friendly_name: 'Hue Tap Bouton 4'
           value_template: "{{ is_state('sensor.hue_tap_switch_1', '4_click') }}"
-          entity_id:
-            - sensor.hue_tap_switch_1

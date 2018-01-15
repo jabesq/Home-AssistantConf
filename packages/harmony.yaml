@@ -27,7 +27,6 @@ group:
           - input_boolean.switch
           - input_boolean.music
           - input_boolean.chromecast
-          - input_boolean.television
 
 #These inputs are mainly used as script flags
 input_boolean:
@@ -43,9 +42,6 @@ input_boolean:
     switch:
         name: Jouer à la Switch
         icon: mdi:nintendo-switch
-    television:
-        name: Regarder la TV
-        icon: mdi:television
     chromecast:
         name: Regarder Chromecast
         icon: mdi:cast
@@ -60,7 +56,6 @@ input_select:
           - Jouer a la Switch
           - Écouter de la musique
           - Regarder Chromecast
-          - Regarder la TV
           - PowerOff
 ###############################################################################
 # Automations
@@ -109,9 +104,6 @@ automation:
       entity_id: input_boolean.switch
       to: 'off'
     - platform: state
-      entity_id: input_boolean.television
-      to: 'off'
-    - platform: state
       entity_id: input_boolean.chromecast
       to: 'off'
     condition:
@@ -128,9 +120,6 @@ automation:
         state: 'off'
       - condition: state
         entity_id: input_boolean.switch
-        state: 'off'
-      - condition: state
-        entity_id: input_boolean.television
         state: 'off'
       - condition: state
         entity_id: input_boolean.chromecast
@@ -245,58 +234,6 @@ automation:
       service: remote.turn_on
       data:
         activity: Jouer a la Switch
-        entity_id: remote.harmony_hub
-###############################################################################
-# TV
-###############################################################################
-  - alias: "Regarder TV demarr\xE9 depuis Harmony"
-    hide_entity: true
-    trigger:
-      platform: state
-      entity_id: remote.harmony_hub
-    condition:
-      condition: and
-      conditions:
-      - condition: template
-        value_template: '{{ trigger.to_state.attributes.current_activity == "Regarder
-          la TV" }}'
-      - condition: state
-        entity_id: input_boolean.television
-        state: 'off'
-    action:
-      service: input_boolean.turn_on
-      entity_id: input_boolean.television
-  - alias: "Regarder TV arr\xEAt\xE9 depuis Harmony"
-    hide_entity: true
-    trigger:
-    - entity_id: remote.harmony_hub
-      platform: state
-    condition:
-    - condition: and
-      conditions:
-      - condition: template
-        value_template: '{{ trigger.to_state.attributes.current_activity != "Regarder
-          la TV" }}'
-      - condition: state
-        entity_id: input_boolean.television
-        state: 'on'
-    action:
-    - entity_id: input_boolean.television
-      service: input_boolean.turn_off
-  - alias: "D\xE9marrer Regarder la TV"
-    hide_entity: true
-    trigger:
-      platform: state
-      entity_id: input_boolean.television
-      to: 'on'
-    condition:
-      condition: template
-      value_template: '{{ states.remote.harmony_hub.attributes.current_activity != "Regarder
-        la TV" }}'
-    action:
-      service: remote.turn_on
-      data:
-        activity: Regarder la TV
         entity_id: remote.harmony_hub
 ###############################################################################
 # Apple TV
@@ -483,9 +420,7 @@ automation:
         service: input_boolean.turn_on
         data_template:
             entity_id: >
-              {% if is_state("sensor.harmony_salon", "Regarder la TV") %}
-                  input_boolean.television
-              {% elif is_state("sensor.harmony_salon", "Jouer à PS4") %}
+              {% if is_state("sensor.harmony_salon", "Jouer à PS4") %}
                   input_boolean.ps4
               {% elif is_state("sensor.harmony_salon", "Regarder Apple TV") %}
                   input_boolean.appletv
