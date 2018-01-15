@@ -13,6 +13,8 @@ homeassistant:
     packages: !include_dir_named packages
     customize: !include customize.yaml
 
+cloud:
+
 config:
 
 map:
@@ -130,7 +132,9 @@ ifttt:
 device_tracker:
   - platform: owntracks
     max_gps_accuracy: 150
-    track_new_devices: no
+    new_device_defaults:
+      track_new_devices: False
+      hide_if_away: False
   - platform: asuswrt
     host: !secret asuswrt_host
     username: !secret asuswrt_username

@@ -54,8 +54,6 @@ binary_sensor:
         friendly_name: UPS
         device_class: light
         value_template: "{{ states.sensor.nut_ups_status_data.state == 'OL' or states.sensor.nut_ups_status_data.state == 'OL CHRG' }}"
-        entity_id:
-          - sensor.nut_ups_status_data
 
 group:
     apc_ups:
