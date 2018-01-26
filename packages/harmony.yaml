@@ -2,10 +2,9 @@
 # PACKAGE:      Harmony
 # Description:  
 ###############################################################################
-
 remote:
     platform: harmony
-    name: Salon
+    name: Harmony Hub
     activity: 'Regarder Apple TV'
 
 sensor:
@@ -57,6 +56,32 @@ input_select:
           - Écouter de la musique
           - Regarder Chromecast
           - PowerOff
+
+switch:
+  - platform: template
+    switches:
+        appletv:
+            friendly_name: Regarder Apple TV
+            value_template: "{{ is_state('input_boolean.appletv', 'on') }}"
+            turn_on:
+                service: input_boolean.turn_on
+                data:
+                    entity_id: input_boolean.appletv
+            turn_off:
+                service: input_boolean.turn_off
+                data:
+                    entity_id: input_boolean.appletv
+        ps4:
+            friendly_name: Jouer à PS4
+            value_template: "{{ is_state('input_boolean.ps4', 'on') }}"
+            turn_on:
+                service: input_boolean.turn_on
+                data:
+                    entity_id: input_boolean.ps4
+            turn_off:
+                service: input_boolean.turn_off
+                data:
+                    entity_id: input_boolean.ps4
 ###############################################################################
 # Automations
 ###############################################################################

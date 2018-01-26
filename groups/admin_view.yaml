@@ -4,6 +4,7 @@ admin_view:
     entities:
       - group.zw_multisensor_entree
       - group.zw_arbre_lumiere
+      - group.zw_detecteur_inondation
       - group.hue_tap_salon
       - group.hue_motion_cuisine
       - group.nest_protect
