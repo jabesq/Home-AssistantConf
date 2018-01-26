@@ -150,11 +150,6 @@ alarm_control_panel:
     platform: manual
     pending_time: 30
 
-remote:
-    platform: harmony
-    name: Salon
-    activity: 'Regarder Apple TV'
-
 media_player:
     platform: cast
     ignore_cec:
@@ -163,6 +158,7 @@ media_player:
 apple_tv:
     host: !secret apple_tv_ip
     login_id: !secret apple_tv_id
+    start_off: true
 
 emulated_hue:
 

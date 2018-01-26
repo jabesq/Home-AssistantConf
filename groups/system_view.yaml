@@ -18,3 +18,4 @@ system_view:
       - zwave.multisensor_entree
       - zwave.arbre_lumiere
       - zwave.remotec_zxt120eu
+      - zwave.detecteur_inondation

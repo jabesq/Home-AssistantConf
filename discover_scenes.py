@@ -12,12 +12,23 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import argparse
+
 import phue
 import pprint
 
+
+def getargs():
+    parser = argparse.ArgumentParser(description='Discover Hue Groups / Scenes')
+    parser.add_argument('conf', metavar='hue_conf', help='hue config file')
+    args = parser.parse_args()
+    return args
+
+
 def discover():
+    args = getargs()
     pp = pprint.PrettyPrinter()
-    bridge = phue.Bridge(config_file_path="./phue.conf")
+    bridge = phue.Bridge(config_file_path=args.conf)
     bridge.connect()
 
     print("List of Groups")

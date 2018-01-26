@@ -1,0 +1,8 @@
+weather_view:
+    name: Meteo
+    view: yes
+    icon: mdi:weather-partlycloudy
+    entities:
+      - group.netatmo_exterieur
+      - group.daily_forecast
+      - group.weather_overview

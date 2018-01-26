@@ -43,3 +43,11 @@ group:
         name: Lumière Chambre Ami
         entities:
           - light.lampe_chambre_damis
+
+script:
+    hue_soiree_tv:
+        sequence:
+          - service: hue.hue_activate_scene
+            data:
+                group_name: "Salon"
+                scene_name: "Détente"
