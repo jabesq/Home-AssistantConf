@@ -1,0 +1,42 @@
+# Example configuration.yaml entry for the Telegram Bot
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api_key
+    allowed_chat_ids:
+      - 428464579
+
+# Example configuration.yaml entry for the notifier
+notify:
+  - name: telegram_notify
+    platform: telegram
+    chat_id: 428464579
+
+automation:
+  - alias: 'Telegram bot that reply pong to ping'
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+        platform: event
+        event_type: telegram_command
+        event_data:
+            command: '/ping'
+    action:
+      - service: notify.telegram_notify
+        data:
+            message: 'pong 2'
+  - alias: 'Telegram start'
+    initial_state: 'on'
+    hide_entity: true
+    trigger:
+        platform: event
+        event_type: telegram_command
+        event_data:
+            command: '/start'
+    action:
+      - service: notify.telegram_notify
+        data:
+            message: 'commands'
+            data:
+                keyboard:
+                  - '/volets, /lumières'
+                  - '/alarm'
