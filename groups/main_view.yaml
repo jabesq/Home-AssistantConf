@@ -36,7 +36,7 @@ home:
       - sun.sun
       - alarm_control_panel.ha_alarm
       - sensor.time
-      - device_tracker.hugo_iphone_6s
+      - device_tracker.hugo_iphone
       - device_tracker.vanessa
       - sensor.yr_symbol
       - sensor.battery_iphone

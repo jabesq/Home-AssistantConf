@@ -102,8 +102,8 @@ zeroconf:
 ios:
     push:
         categories:
-          - name: Alarm
-            identifier: 'ALARM'
+          - name: alarm
+            identifier: 'camera'
             actions:
               - identifier: 'FIRE_ALARM'
                 title: 'Activer Alarme'
@@ -144,7 +144,7 @@ proximity:
     home:
         tolerance: 50
         devices:
-          - device_tracker.hugo_iphone_6s
+          - device_tracker.hugo_iphone
 
 alarm_control_panel:
     platform: manual

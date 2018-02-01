@@ -6,28 +6,20 @@ Home Assistant runs on my [Raspberry Pi 3](http://amzn.to/2e3DOBY) with [Aeon La
 * Lots of iOS Devices (iPads, iPhones)
 * Nvidia Shield Tablet
 * Android Phone
-
-
 * Apple TV
 * Chromecast
 * Logitech Harmony Hub
 * Google Home mini
 * Sonos Play:1
-
-
 * Nest Protects - Smart Smoke Detectors - [Blog Post](http://www.vmwareinfo.com/2017/06/psa-check-out-your-smoke-detectors-once.html)
 * Phillips Hue Hub Gen 2
 * Mixture of Hue Colored lights, White Lights.
 * [3 Hue Go](http://amzn.to/2iB36Ii) - Great lights for the kids since they have an actual button on them for control.
-
-
 * Neato Botvac Connected
 * Netatmo Weather Station
 * Netatmo Welcome camera
 * NUT APC
 * RFXCom USB Transceiver
-
-
 * Aeon Labs Z Wave Stick (GEN 5)
 * FIBARO Wall Plug Gen5
 * FIBARO Zwave+ Flood Sensor
