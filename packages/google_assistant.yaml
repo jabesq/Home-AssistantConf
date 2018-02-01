@@ -10,19 +10,27 @@ google_assistant:
             name: Arbre Lumière
             type: light
             expose: true
-        switch.appletv:
+
+        input_boolean.appletv:
             name: Apple TV
             aliases:
               - Apple TV
               - Apple télé
+            type: switch
             expose: true
-        switch.ps4:
+        input_boolean.ps4:
             name: Playstation 4
             aliases:
               - Playstation 4
               - Playstation
               - PS4
+            type: switch
             expose: true
+        remote.harmony_hub:
+            name: Télévision
+            expose: true
+            type: switch
+
         cover.global_cover:
             name: Tous les volets
             aliases:
@@ -33,10 +41,3 @@ google_assistant:
             name: Soirée TV
             type: scene
             expose: true
-        remote.harmony_hub:
-            name: Télévision
-            aliases:
-              - Télévision
-              - Télé
-            expose: true
-            type: switch

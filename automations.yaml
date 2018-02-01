@@ -73,7 +73,7 @@
     at: '14:30:00'
   condition:
     condition: zone
-    entity_id: device_tracker.hugo_iphone_6s
+    entity_id: device_tracker.hugo_iphone
     zone: zone.work
   action:
     service: notify.pushbullet
@@ -89,11 +89,11 @@
   - below: 30
     entity_id: sensor.battery_iphone
     platform: numeric_state
-  - entity_id: device_tracker.hugo_iphone_6s
+  - entity_id: device_tracker.hugo_iphone
     event: enter
     platform: zone
     zone: zone.work
-  - entity_id: device_tracker.hugo_iphone_6s
+  - entity_id: device_tracker.hugo_iphone
     event: enter
     platform: zone
     zone: zone.home
@@ -103,10 +103,10 @@
     - condition: or
       conditions:
       - condition: zone
-        entity_id: device_tracker.hugo_iphone_6s
+        entity_id: device_tracker.hugo_iphone
         zone: zone.work
       - condition: zone
-        entity_id: device_tracker.hugo_iphone_6s
+        entity_id: device_tracker.hugo_iphone
         zone: zone.home
     - below: 30
       condition: numeric_state
@@ -186,9 +186,12 @@
 - action:
   - data:
       data:
-        entity_id: camera.salon
+        attachment:
+          content-type: jpeg
         push:
-          category: ALARM
+          badge: 0
+          category: camera
+        entity_id: camera.salon
       message: Quelqu'un d'inconnu a été vu
     service: notify.iosapp
   alias: '[ALARME] [iOS] Notification pour déclencher alarme manuellement'
@@ -203,14 +206,14 @@
     to: 'on'
 - action:
   - data:
-      actionName: FIRE_ALARM
+      message: Test
     service: notify.iosapp
   alias: '[ALARME] [iOS] Alarme déclenché manuellement'
   condition: []
   id: alarm_manual_trigger
   trigger:
   - event_data:
-      message: Test
+      actionName: FIRE_ALARM
     event_type: ios.notification_action_fired
     platform: event
 - action:
@@ -345,7 +348,7 @@
   - condition: and
     conditions:
     - condition: template
-      value_template: '{{ is_state_attr(''device_tracker.hugo_iphone_6s'', ''source_type'',
+      value_template: '{{ is_state_attr(''device_tracker.hugo_iphone'', ''source_type'',
         ''gps'')  }}'
     - condition: state
       entity_id: device_tracker.vanessa
@@ -383,5 +386,5 @@
     for:
       minutes: 5
   - platform: template
-    value_template: '{{ is_state_attr(''device_tracker.hugo_iphone_6s'', ''source_type'',
+    value_template: '{{ is_state_attr(''device_tracker.hugo_iphone'', ''source_type'',
       ''router'')  }}'

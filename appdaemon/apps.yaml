@@ -1,3 +1,45 @@
 TelegramBot:
     module: TelegramBot
     class: TelegramBotEventListener
+Switch Reset:
+    class: SwitchReset
+    delay: '10'
+    dependencies: globals
+    file: /home/homeassistant/appdaemon_log/switches.db
+    module: switch_reset
+
+HarmonyMusic:
+    class: HarmonySceneHandler
+    module: harmony
+    scene: Écouter de la musique
+    input_boolean: input_boolean.music
+    logfile: STDOUT
+    errorfile: STDOUT
+HarmonyPS4:
+    class: HarmonySceneHandler
+    module: harmony
+    scene: Jouer à PS4
+    input_boolean: input_boolean.ps4
+    logfile: STDOUT
+    errorfile: STDOUT
+HarmonyNintendoSwitch:
+    class: HarmonySceneHandler
+    module: harmony
+    scene: Jouer a la Switch
+    input_boolean: input_boolean.switch
+    logfile: STDOUT
+    errorfile: STDOUT
+HarmonyAppleTV:
+    class: HarmonySceneHandler
+    module: harmony
+    scene: Regarder Apple TV
+    input_boolean: input_boolean.appletv
+    logfile: STDOUT
+    errorfile: STDOUT
+HarmonyChromecast:
+    class: HarmonySceneHandler
+    module: harmony
+    scene: Regarder Chromecast
+    input_boolean: input_boolean.chromecast
+    logfile: STDOUT
+    errorfile: STDOUT
