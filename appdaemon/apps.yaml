@@ -1,12 +1,12 @@
 TelegramBot:
     module: TelegramBot
     class: TelegramBotEventListener
-Switch Reset:
-    class: SwitchReset
-    delay: '10'
-    dependencies: globals
-    file: /home/homeassistant/appdaemon_log/switches.db
-    module: switch_reset
+# Switch Reset:
+#     class: SwitchReset
+#     delay: '10'
+#     dependencies: globals
+#     file: /home/homeassistant/appdaemon_log/switches.db
+#     module: switch_reset
 
 HarmonyMusic:
     class: HarmonySceneHandler
@@ -43,3 +43,23 @@ HarmonyChromecast:
     input_boolean: input_boolean.chromecast
     logfile: STDOUT
     errorfile: STDOUT
+HarmonyInputSelects:
+    class: BooleanORHandler
+    module: masters_slave_input
+    master_inputs_boolean:
+      - input_boolean.appletv
+      - input_boolean.ps4
+      - input_boolean.switch
+      - input_boolean.music
+      - input_boolean.chromecast
+    slave_input: remote.harmony_hub
+    not_on: 1
+
+BabyphoneInputSelects:
+    class: BooleanORHandler
+    module: masters_slave_input
+    master_inputs_boolean:
+      - input_boolean.babyphone_salon
+      - input_boolean.babyphone_cuisine
+      - input_boolean.babyphone_chambre
+    slave_input: input_boolean.babyphone

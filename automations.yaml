@@ -54,17 +54,19 @@
   hide_entity: true
   id: boot_away
   trigger:
+  - event: start
     platform: homeassistant
-    event: start
   condition:
-    condition: state
+  - condition: state
     entity_id: group.all_devices
     state: not_home
   action:
-  - service: alarm_control_panel.alarm_arm_away
-    entity_id: alarm_control_panel.ha_alarm
-  - service: input_boolean.turn_on
-    entity_id: input_boolean.lumiere_entree_auto
+  - data:
+      entity_id: alarm_control_panel.ha_alarm
+    service: alarm_control_panel.alarm_arm_away
+  - data:
+      entity_id: input_boolean.lumiere_entree_auto
+    service: input_boolean.turn_on
 - alias: 'Rapport Activite Elsys #work'
   id: erp_elsys
   hide_entity: true
@@ -117,10 +119,6 @@
       title: Batterie iPhone
     service: notify.pushbullet
 - action:
-  - alias: extinction Arbre lumière
-    data:
-      entity_id: switch.arbre_lumiere_switch
-    service: switch.turn_off
   - alias: Fermeture Volet
     data:
       entity_id: cover.global_cover
@@ -129,11 +127,6 @@
     data:
       entity_id: remote.harmony_hub
     service: remote.turn_off
-  - alias: Arret Clim
-    data:
-      entity_id: climate.remotec_zxt120eu_cooling_1
-      operation_mode: 'Off'
-    service: climats.set_operation_mode
   alias: Au Dodo
   condition:
   - after: '22:00:00'

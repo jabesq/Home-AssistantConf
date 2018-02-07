@@ -20,6 +20,8 @@ group.all_scripts:
   hidden: false
 group.all_covers:
   hidden: false
+group.home:
+  order: 0
 group.weather_view:
   order: 1
 group.salon_view:
@@ -30,12 +32,16 @@ group.cuisine_view:
   order: 4
 group.lights_view:
   order: 5
-group.system_view:
+group.babyphone_view:
   order: 6
-group.admin_view:
+group.security_view:
   order: 7
-group.automation_view:
+group.sensors_view:
   order: 8
+group.system_view:
+  order: 9
+group.automation_view:
+  order: 10
 sensor.fastcom_download:
   icon: mdi:flash
 sensor.capteur_motion_cuisine:
@@ -67,3 +73,5 @@ sensor.machine_a_laver_sourcenodeid:
   hidden: true
 sensor.iphone:
   hidden: true
+binary_sensor.ffmpeg_noise:
+  friendly_name: Babyphone (bruit)

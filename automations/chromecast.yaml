@@ -1,6 +1,7 @@
 ### Chromecast/Harmony Sync ###
 - alias: "Chromecast => démarre ampli"
   hide_entity: true
+  initial_state: 'on'
   trigger:
       platform: state
       entity_id: media_player.salon_chromecast
@@ -13,6 +14,7 @@
 
 - alias: "Chromecast => stop ampli"
   hide_entity: true
+  initial_state: 'on'
   trigger:
       platform: state
       entity_id: media_player.salon_chromecast

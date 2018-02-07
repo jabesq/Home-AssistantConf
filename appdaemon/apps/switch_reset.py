@@ -23,7 +23,7 @@ class SwitchReset(appapi.AppDaemon):
     self.device_db = shelve.open(self.args["file"])
     self.listen_event(self.ha_event, "ha_started")
     self.listen_event(self.appd_event, "appd_started")
-    self.listen_state(self.state_change, "input_boolean")
+    self.listen_state(self.state_change, entity="input_boolean")
     self.listen_state(self.state_change, "input_select")
     self.listen_state(self.state_change, "input_number")
     self.listen_state(self.state_change, "device_tracker")

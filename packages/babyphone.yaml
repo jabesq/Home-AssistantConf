@@ -1,0 +1,75 @@
+group:
+    babyphone_view:
+        view: yes
+        icon: mdi:baby-buggy
+        entities:
+          - camera.camera_chambre_ianto
+          - binary_sensor.ffmpeg_noise
+          - group.babyphone_control
+    babyphone_control:
+        name: Babyphone
+        control: hidden
+        entities:
+          - input_boolean.babyphone
+          - input_boolean.babyphone_salon
+          - input_boolean.babyphone_cuisine
+          - input_boolean.babyphone_chambre
+camera:
+    platform: ffmpeg
+    name: Camera Chambre Ianto
+    input: !secret cam_ip_ianto_url
+    extra_arguments: -pred 1 -q:v 2
+
+binary_sensor:
+    platform: ffmpeg_noise
+    input: !secret cam_ip_ianto_url
+    extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
+    output: -f mp3 icecast://stream_user:stream_pw@127.0.0.1:8000/babyphone.mp3
+    initial_state: false
+    duration: 2
+    reset: 60
+    peak: -32
+
+input_boolean:
+    babyphone:
+        name: Babyphone
+        initial: off
+        icon: mdi:cellphone-wireless
+    babyphone_salon:
+        name: Babyphone Salon
+        initial: off
+        icon: mdi:sofa
+    babyphone_cuisine:
+        name: Babyphone Cuisine
+        initial: off
+        icon: mdi:fridge
+    babyphone_chambre:
+        name: Babyphone Chambre
+        initial: off
+        icon: mdi:hotel
+
+automation:
+    - action:
+      - data:
+          entity_id: binary_sensor.ffmpeg_noise
+        service: ffmpeg.start
+      alias: Babyphone On
+      condition: []
+      trigger:
+      - entity_id: input_boolean.babyphone
+        from: 'off'
+        platform: state
+        to: 'on'
+      initial_state: 'on'
+    - action:
+      - data:
+          entity_id: binary_sensor.ffmpeg_noise
+        service: ffmpeg.stop
+      alias: Babyphone off
+      condition: []
+      trigger:
+      - entity_id: input_boolean.babyphone
+        from: 'on'
+        platform: state
+        to: 'off'
+      initial_state: 'on'
