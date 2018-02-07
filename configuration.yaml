@@ -99,6 +99,10 @@ discovery:
 #Zeroconf/Avahi/Bonjour
 zeroconf:
 
+#FFmpeg
+ffmpeg:
+    ffmpeg_bin: /usr/bin/ffmpeg
+
 ios:
     push:
         categories:

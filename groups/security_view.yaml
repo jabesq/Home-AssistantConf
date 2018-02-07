@@ -10,5 +10,6 @@ security_view:
     entities:
       - alarm_control_panel.ha_alarm
       - camera.salon
+      - camera.camera_chambre_ianto
       - group.capteur_security
       - group.welcome_salon_binary_sensors

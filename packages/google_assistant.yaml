@@ -26,6 +26,13 @@ google_assistant:
               - PS4
             type: switch
             expose: true
+        input_boolean.switch:
+            name: Nintendo Switch
+            aliases:
+              - Nintendo Switch
+              - Switch
+            type: switch
+            expose: true
         remote.harmony_hub:
             name: Télévision
             expose: true
@@ -37,7 +44,25 @@ google_assistant:
               - Tous les volets
               - Les volets
             expose: true
+        cover.volet_chambre_amis:
+            aliases:
+              - Volet de la chambre d'amis
+              - Volet chambre amis
+            expose: true
+        cover.volet_cuisine:
+            aliases:
+              - Volet de la cuisine
+              - Volet cuisine
+            expose: true
+        cover.volet_salon:
+            aliases:
+              - Volet du salon
+              - Volet salon
+            expose: true
         script.hue_soiree_tv:
             name: Soirée TV
+            aliases:
+              - Soirée TV
+              - Soirée Télé
             type: scene
             expose: true

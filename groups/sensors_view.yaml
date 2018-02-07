@@ -1,4 +1,4 @@
-admin_view:
+sensors_view:
     view: yes
     icon: mdi:tune
     entities:

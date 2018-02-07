@@ -87,49 +87,6 @@ automation:
       data_template:
         entity_id: remote.harmony_hub
         activity: '{{ states.input_select.harmony.state }}'
-  - alias: "Arr\xEAter Harmony Hub"
-    hide_entity: true
-    trigger:
-    - platform: state
-      entity_id: input_boolean.appletv
-      to: 'off'
-    - platform: state
-      entity_id: input_boolean.music
-      to: 'off'
-    - platform: state
-      entity_id: input_boolean.ps4
-      to: 'off'
-    - platform: state
-      entity_id: input_boolean.switch
-      to: 'off'
-    - platform: state
-      entity_id: input_boolean.chromecast
-      to: 'off'
-    condition:
-      condition: and
-      conditions:
-      - condition: state
-        entity_id: input_boolean.appletv
-        state: 'off'
-      - condition: state
-        entity_id: input_boolean.music
-        state: 'off'
-      - condition: state
-        entity_id: input_boolean.ps4
-        state: 'off'
-      - condition: state
-        entity_id: input_boolean.switch
-        state: 'off'
-      - condition: state
-        entity_id: input_boolean.chromecast
-        state: 'off'
-      - condition: state
-        entity_id: remote.harmony_hub
-        state: 'on'
-    action:
-      service: remote.turn_off
-      data:
-        entity_id: remote.harmony_hub
 
 ###############################################################################
 # Apple TV
