@@ -19,3 +19,4 @@ system_view:
       - zwave.arbre_lumiere
       - zwave.remotec_zxt120eu
       - zwave.detecteur_inondation
+      - input_boolean.guest_mode

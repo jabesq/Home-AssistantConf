@@ -55,21 +55,9 @@ script.ouvrir_volet:
   hidden: true
 remote.harmony_hub:
   hidden: false
-sensor.detecteur_inondation_alarm_level:
-  hidden: true
-sensor.detecteur_inondation_alarm_type:
-  hidden: true
-sensor.detecteur_inondation_sourcenodeid:
-  hidden: true
-sensor.machine_a_laver_alarm_level:
-  hidden: true
-sensor.machine_a_laver_alarm_type:
-  hidden: true
 sensor.machine_a_laver_exporting:
   hidden: true
 sensor.machine_a_laver_power_management:
-  hidden: true
-sensor.machine_a_laver_sourcenodeid:
   hidden: true
 sensor.iphone:
   hidden: true

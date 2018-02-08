@@ -16,23 +16,24 @@
   hide_entity: true
   trigger:
   - entity_id: group.all_devices
-    for:
-      minutes: 1
     platform: state
     to: not_home
   action:
   - data:
-      entity_id: group.all_lights
-    service: homeassistant.turn_off
-  - data:
       entity_id: media_player.bureau,media_player.cuisine,media_player.salon
     service: media_player.media_pause
   - data:
-      entity_id: switch.ganondorf_schedule
-    service: switch.turn_on
-  - data:
       entity_id: alarm_control_panel.ha_alarm
     service: alarm_control_panel.alarm_arm_away
+  - condition: state
+    entity_id: input_boolean.guest_mode
+    state: 'off'
+  - data:
+      entity_id: group.all_lights
+    service: homeassistant.turn_off
+  - data:
+      entity_id: switch.ganondorf_schedule
+    service: switch.turn_on
   - data:
       entity_id: input_boolean.lumiere_entree_auto
     service: input_boolean.turn_on
@@ -50,6 +51,9 @@
   - data:
       entity_id: alarm_control_panel.ha_alarm
     service: alarm_control_panel.alarm_disarm
+  - data:
+      entity_id: input_boolean.lumiere_entree_auto
+    service: input_boolean.turn_off
 - alias: Restart alarm if away
   hide_entity: true
   id: boot_away
@@ -283,6 +287,7 @@
   - data:
       entity_id: group.all_automations
     service: homeassistant.turn_on
+  - service: google_assistant.request_sync
   trigger:
   - event: start
     platform: homeassistant
@@ -338,14 +343,9 @@
       - 98
     service: light.turn_on
   - delay: 00:00:30
-  - condition: and
-    conditions:
-    - condition: template
-      value_template: '{{ is_state_attr(''device_tracker.hugo_iphone'', ''source_type'',
-        ''gps'')  }}'
-    - condition: state
-      entity_id: device_tracker.vanessa
-      state: not_home
+  - condition: state
+    entity_id: group.all_devices
+    state: not_home
   - data:
       entity_id: light.spot_entree
     service: light.turn_off
@@ -365,19 +365,3 @@
     from: 'off'
     platform: state
     to: 'on'
-- action:
-  - data:
-      entity_id: input_boolean.lumiere_entree_auto
-    service: input_boolean.turn_off
-  alias: Désactivation lumière bienvenue
-  condition: []
-  id: '1507646170735'
-  trigger:
-  - entity_id: device_tracker.vanessa
-    platform: state
-    to: home
-    for:
-      minutes: 5
-  - platform: template
-    value_template: '{{ is_state_attr(''device_tracker.hugo_iphone'', ''source_type'',
-      ''router'')  }}'
