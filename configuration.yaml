@@ -12,6 +12,16 @@ homeassistant:
     elevation: 0
     packages: !include_dir_named packages
     customize: !include customize.yaml
+    customize_glob:
+        "sensor.*_sourcenodeid":
+            hidden: true
+        "sensor.*_alarm_level":
+            hidden: true
+        "sensor.*_alarm_type":
+            hidden: true
+    customize_domain:
+        automation:
+            initial_state: 'on'
 
 cloud:
 
@@ -168,6 +178,9 @@ emulated_hue:
 
 input_boolean:
     lumiere_entree_auto:
+    guest_mode:
+        name: Mode Invité
+        icon: mdi:account-multiple
 
 #Sensors
 sensor: !include sensors.yaml

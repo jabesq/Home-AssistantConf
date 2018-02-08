@@ -29,24 +29,33 @@ script:
           - service: cover.open_cover
             entity_id: cover.volet_salon
           - service: cover.open_cover
-            entity_id: cover.volet_chambre_amis
-          - service: cover.open_cover
             entity_id: cover.volet_cuisine
+          - condition: state
+            entity_id: input_boolean.guest_mode
+            state: 'off'
+          - service: cover.open_cover
+            entity_id: cover.volet_chambre_amis
     fermer_volet:
         alias: Fermeture Volet
         sequence:
           - service: cover.close_cover
             entity_id: cover.volet_salon
           - service: cover.close_cover
-            entity_id: cover.volet_chambre_amis
-          - service: cover.close_cover
             entity_id: cover.volet_cuisine
+          - condition: state
+            entity_id: input_boolean.guest_mode
+            state: 'off'
+          - service: cover.close_cover
+            entity_id: cover.volet_chambre_amis
     volet_stop:
         alias: Arret Volet/MyPosition
         sequence:
           - service: cover.stop_cover
             entity_id: cover.volet_salon
           - service: cover.stop_cover
-            entity_id: cover.volet_chambre_amis
-          - service: cover.stop_cover
             entity_id: cover.volet_cuisine
+          - condition: state
+            entity_id: input_boolean.guest_mode
+            state: 'off'
+          - service: cover.stop_cover
+            entity_id: cover.volet_chambre_amis
