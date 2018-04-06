@@ -63,3 +63,30 @@ BabyphoneInputSelects:
       - input_boolean.babyphone_cuisine
       - input_boolean.babyphone_chambre
     slave_input: input_boolean.babyphone
+
+BabyphoneSalon:
+    class: BabyPhoneHandler
+    module: babyphone
+    media_player: media_player.salon_google_home
+    lights: light.salon
+    constrain_input_boolean: input_boolean.babyphone_salon
+    logfile: STDOUT
+
+BabyphoneCuisine:
+    class: BabyPhoneHandler
+    module: babyphone
+    media_player: media_player.cuisine
+    sonos: 1
+    lights: light.salon
+    constrain_input_boolean: input_boolean.babyphone_cuisine
+    logfile: STDOUT
+
+BabyphoneChambre:
+    class: BabyPhoneHandler
+    module: babyphone
+    media_player: media_player.chambre
+    sonos: 1
+    chambre: 1
+    lights: light.lampe_de_chevet_vanessa
+    constrain_input_boolean: input_boolean.babyphone_chambre
+    logfile: STDOUT

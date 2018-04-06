@@ -29,3 +29,71 @@
       hue_tap_salon_btn4:
           friendly_name: 'Hue Tap Bouton 4'
           value_template: "{{ is_state('sensor.hue_tap_switch_1', '4_click') }}"
+
+- platform: bayesian
+  name: 'Bayesian Sleeping'
+  prior: 0.4
+  probability_threshold: 0.8
+  observations:
+    - entity_id: 'group.all_devices'
+      prob_given_true: 0.9
+      prob_given_false: 0.5
+      platform: 'state'
+      to_state: 'home'
+    - entity_id: 'group.all_devices'
+      prob_given_true: 0.1
+      platform: 'state'
+      to_state: 'not_home'
+    - entity_id: 'sensor.sun'
+      prob_given_true: 0.9
+      prob_given_false: 0.3
+      platform: 'state'
+      to_state: 'below_horizon'
+    - entity_id: 'remote.harmony_hub'
+      prob_given_true: 0.9
+      prob_given_false: 0.6
+      platform: 'state'
+      to_state: 'off'
+    - entity_id: 'sensor.netatmo_station_noise'
+      prob_given_true: 0.9
+      prob_given_false: 0.6
+      platform: 'numeric_state'
+      below: 40
+    - entity_id: 'sensor.netatmo_station_noise'
+      prob_given_true: 0.2
+      platform: 'numeric_state'
+      above: 50
+    - entity_id: 'sensor.netatmo_chambre_co2'
+      prob_given_true: 0.9
+      prob_given_false: 0.3
+      platform: 'numeric_state'
+      above: 1500
+    - entity_id: 'sensor.netatmo_chambre_co2'
+      prob_given_true: 0.9
+      prob_given_false: 0.5
+      platform: 'numeric_state'
+      above: 1000
+    - entity_id: 'sensor.netatmo_chambre_co2'
+      prob_given_true: 0.2
+      platform: 'numeric_state'
+      below: 500
+    - entity_id: 'light.chambre'
+      prob_given_true: 0.9
+      prob_given_false: 0.6
+      platform: 'state'
+      to_state: 'off'
+    - entity_id: 'light.chambre'
+      prob_given_true: 0.4
+      prob_given_false: 0.8
+      platform: 'state'
+      to_state: 'on'
+    - entity_id: 'binary_sensor.multisensor_entree_sensor'
+      prob_given_true: 0.9
+      prob_given_false: 0.7
+      platform: 'state'
+      to_state: 'off'
+    - entity_id: 'binary_sensor.motion_hue_cuisine'
+      prob_given_true: 0.9
+      prob_given_false: 0.65
+      platform: 'state'
+      to_state: 'off'

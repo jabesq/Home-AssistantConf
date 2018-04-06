@@ -6,12 +6,14 @@ sensor:
     - type: memory_free
     - type: processor_use
     - type: last_boot
+    - type: swap_use
 
 group:
     System:
         name: System
         entities:
-          - sensor.cpu_used
-          - sensor.disk_used_
-          - sensor.ram_available
+          - sensor.processor_use
+          - sensor.disk_use_percent_
+          - sensor.memory_free
+          - sensor.swap_use
           - sensor.last_boot

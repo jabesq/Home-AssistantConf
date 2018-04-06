@@ -5,6 +5,7 @@ light:
 group:
     lumiere_piece:
         name: Lumière Pièces
+        control: hidden
         entities:
           - light.salon
           - light.couloir
@@ -26,14 +27,14 @@ group:
         entities:
           - light.spot_couloir_1
           - light.spot_couloir_2
-    
+
     lumieres_chambre:
         name: Lumières Chambre
         entities:
           - light.plafond_chambre
           - light.lampe_de_chevet_hugo
           - light.lampe_de_chevet_vanessa
-    
+
     lumiere_chambre_enfant:
         name: Lumière Chambre Enfant
         entities:
@@ -44,10 +45,44 @@ group:
         entities:
           - light.lampe_chambre_damis
 
+    scene_hue:
+        name: Scène Hue
+        control: hidden
+        entities:
+          - script.hue_soiree_tv
+          - script.hue_veilleuse_hugo
+
 script:
     hue_soiree_tv:
+        alias: Scène soirée TV
         sequence:
           - service: hue.hue_activate_scene
             data:
                 group_name: "Salon"
                 scene_name: "Détente"
+    hue_veilleuse_hugo:
+        alias: Scène Veilleuse Hugo
+        sequence:
+          - service: hue.hue_activate_scene
+            data:
+                group_name: "Chambre"
+                scene_name: "Détente"
+    hue_debut_soiree:
+        alias: Début de soirée
+        sequence:
+          - service: hue.hue_activate_scene
+            data:
+                group_name: "Salon"
+                scene_name: "Lecture"
+
+switch:
+  - platform: flux
+    stop_time: '21:00'
+    lights:
+      - light.spot_bibliotheque
+      - light.spot_entree
+      - light.spot_salon
+      - light.spot_salon_couloir
+      - light.plafonnier_salon
+      - light.lampe_du_cube
+      - light.hue_go

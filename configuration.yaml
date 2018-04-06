@@ -29,6 +29,9 @@ config:
 
 map:
 
+influxdb:
+    host: 192.168.1.20
+
 http:
     api_password: !secret api_password
     base_url: !secret base_url
@@ -46,15 +49,14 @@ zone:
     name: work
     latitude: !secret work_latitude
     longitude: !secret work_longitude
-    radius: 200
+    radius: 100
     icon: mdi:briefcase
 
 # Track the sun
 sun:
 
 recorder:
-    purge_interval: 2
-    purge_keep_days: 10
+    db_url: postgres://@/hass
     include:
         domains:
           - automation
@@ -112,6 +114,8 @@ zeroconf:
 #FFmpeg
 ffmpeg:
     ffmpeg_bin: /usr/bin/ffmpeg
+
+hue:
 
 ios:
     push:
