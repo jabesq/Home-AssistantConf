@@ -63,3 +63,12 @@ sensor.iphone:
   hidden: true
 binary_sensor.ffmpeg_noise:
   friendly_name: Babyphone (bruit)
+input_boolean.guest_mode: {}
+input_boolean.babyphone:
+  homebridge_hidden: true
+switch.ganondorf_schedule:
+  homebridge_hidden: true
+input_boolean.lumiere_entree_auto:
+  homebridge_hidden: true
+input_boolean.neato_weekend:
+  homebridge_hidden: true

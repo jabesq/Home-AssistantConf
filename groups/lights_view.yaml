@@ -2,11 +2,13 @@ lights_view:
     view: yes
     icon: mdi:lightbulb-on-outline
     entities:
-      - group.hue_motion_cuisine
-      - group.hue_tap_salon
+      - group.lumiere_piece
       - group.light_salon
       - group.spots_salon
       - group.lumiere_couloir
       - group.lumieres_chambre
       - group.lumiere_chambre_enfant
       - group.lumiere_chambre_ami
+      - group.scene_hue
+      - group.hue_motion_cuisine
+      - group.hue_tap_salon
