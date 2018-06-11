@@ -23,7 +23,7 @@ camera:
 binary_sensor:
     platform: ffmpeg_noise
     input: !secret cam_ip_ianto_url
-    extra_arguments: -filter:a highpass=f=300,lowpass=f=2500,volume=volume=2 -codec:a libmp3lame -ar 16000
+    extra_arguments: -filter:a highpass=f=300,lowpass=f=2500 -codec:a libmp3lame -ar 16000
     output: -f mp3 icecast://stream_user:stream_pw@127.0.0.1:8000/babyphone.mp3
     initial_state: false
     duration: 2

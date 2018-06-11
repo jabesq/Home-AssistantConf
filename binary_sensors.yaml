@@ -1,35 +1,3 @@
-- platform: template
-  sensors:
-      motion_hue_cuisine:
-          friendly_name: 'Mouvement Cuisine (Hue Motion)'
-          device_class: motion
-          value_template: "{{ is_state('sensor.capteur_motion_cuisine', 'on') }}"
-          delay_off: 00:01:00
-
-- platform: template
-  sensors:
-      hue_tap_salon_btn1:
-          friendly_name: 'Hue Tap Bouton 1'
-          value_template: "{{ is_state('sensor.hue_tap_switch_1', '1_click') }}"
-
-- platform: template
-  sensors:
-      hue_tap_salon_btn2:
-          friendly_name: 'Hue Tap Bouton 2'
-          value_template: "{{ is_state('sensor.hue_tap_switch_1', '2_click') }}"
-
-- platform: template
-  sensors:
-      hue_tap_salon_btn3:
-          friendly_name: 'Hue Tap Bouton 3'
-          value_template: "{{ is_state('sensor.hue_tap_switch_1', '3_click') }}"
-
-- platform: template
-  sensors:
-      hue_tap_salon_btn4:
-          friendly_name: 'Hue Tap Bouton 4'
-          value_template: "{{ is_state('sensor.hue_tap_switch_1', '4_click') }}"
-
 - platform: bayesian
   name: 'Bayesian Sleeping'
   prior: 0.4
@@ -54,6 +22,11 @@
       prob_given_false: 0.6
       platform: 'state'
       to_state: 'off'
+    - entity_id: 'remote.harmony_hub'
+      prob_given_true: 0.1
+      prob_given_false: 0.9
+      platform: 'state'
+      to_state: 'on'
     - entity_id: 'sensor.netatmo_station_noise'
       prob_given_true: 0.9
       prob_given_false: 0.6
@@ -65,11 +38,11 @@
       above: 50
     - entity_id: 'sensor.netatmo_chambre_co2'
       prob_given_true: 0.9
-      prob_given_false: 0.3
+      prob_given_false: 0.4
       platform: 'numeric_state'
       above: 1500
     - entity_id: 'sensor.netatmo_chambre_co2'
-      prob_given_true: 0.9
+      prob_given_true: 0.8
       prob_given_false: 0.5
       platform: 'numeric_state'
       above: 1000
@@ -87,13 +60,3 @@
       prob_given_false: 0.8
       platform: 'state'
       to_state: 'on'
-    - entity_id: 'binary_sensor.multisensor_entree_sensor'
-      prob_given_true: 0.9
-      prob_given_false: 0.7
-      platform: 'state'
-      to_state: 'off'
-    - entity_id: 'binary_sensor.motion_hue_cuisine'
-      prob_given_true: 0.9
-      prob_given_false: 0.65
-      platform: 'state'
-      to_state: 'off'

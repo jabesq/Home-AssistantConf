@@ -91,6 +91,20 @@ automation:
 ###############################################################################
 # Apple TV
 ###############################################################################
+  - alias: "Regarder Apple TV demarr\xE9 depuis Harmony"
+    hide_entity: true
+    trigger:
+      platform: state
+      entity_id: remote.harmony_hub
+    condition:
+      condition: and
+      conditions:
+        - condition: template
+          value_template: '{{ trigger.to_state.attributes.current_activity == "Regarder
+          Apple TV" }}'
+    action:
+      - service: media_player.turn_on
+        entity_id: media_player.apple_tv
   - alias: "Synchro AppleTV mediaplayer <=> Harmony au boot"
     hide_entity: true
     trigger:

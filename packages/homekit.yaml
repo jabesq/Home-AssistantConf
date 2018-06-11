@@ -1,0 +1,25 @@
+homekit:
+    auto_start: False
+    filter:
+        exclude_domains:
+          - light
+          - script
+          - remote
+          - sensor
+          - binary_sensor
+          - automation
+        exclude_entities:
+          - switch.ganondorf_schedule
+          - input_boolean.babyphone
+          - input_boolean.guest_mode
+          - input_boolean.neato_weekend
+          - input_boolean.lumiere_entree_auto
+
+automation:
+  - alias: 'Start HomeKit'
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - delay: 00:05  # Waits 5 minutes
+      - service: homekit.start

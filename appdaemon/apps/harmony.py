@@ -1,7 +1,8 @@
-import appdaemon.appapi as appapi
+import appdaemon.plugins.hass.hassapi as hass
 
 
-class HarmonySceneHandler(appapi.AppDaemon):
+class HarmonySceneHandler(hass.Hass):
+    """State listener for Harmony states."""
 
     def initialize(self):
         self.listen_state(self.activate_scene_input, "remote.harmony_hub",
