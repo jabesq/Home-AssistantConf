@@ -38,6 +38,12 @@ cover:
             name: Volet Chambre Amis
         071a000001020306: # RFY
             name: Volet Cuisine
+  - platform: group
+    name: Tous les volets
+    entities:
+      - cover.volet_salon
+      - cover.volet_cuisine
+      - cover.volet_chambre_amis
 
 # sensor:
 # - platform: rfxtrx

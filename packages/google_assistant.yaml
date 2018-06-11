@@ -39,12 +39,6 @@ google_assistant:
               - Babyphone
             expose: true
 
-        cover.global_cover:
-            name: Tous les volets
-            aliases:
-              - Tous les volets
-              - Les volets
-            expose: true
         cover.volet_chambre_amis:
             aliases:
               - Volet de la chambre d'amis

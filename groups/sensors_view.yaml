@@ -21,17 +21,3 @@ traffic:
       - sensor.trajet_maisontravail
       - sensor.uberx_time
 
-hue_tap_salon:
-    name: Hue Tap Salon
-    entities:
-      - binary_sensor.hue_tap_salon_btn1
-      - binary_sensor.hue_tap_salon_btn2
-      - binary_sensor.hue_tap_salon_btn3
-      - binary_sensor.hue_tap_salon_btn4
-
-hue_motion_cuisine:
-    name: Hue Motion Cuisine
-    entities:
-      - binary_sensor.motion_hue_cuisine
-      - sensor.lux_hue_cuisine
-      - sensor.temp_hue_cuisine

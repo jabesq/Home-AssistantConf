@@ -125,7 +125,7 @@
 - action:
   - alias: Fermeture Volet
     data:
-      entity_id: cover.global_cover
+      entity_id: cover.tous_les_volets
     service: cover.close_cover
   - alias: Extinction TV
     data:
@@ -138,7 +138,7 @@
     condition: time
   id: bed_time
   trigger:
-  - entity_id: light.salon
+  - entity_id: light.lumieres_salon
     platform: state
     to: 'off'
 - action:
@@ -293,12 +293,15 @@
     platform: homeassistant
   alias: Boot
   id: boot
-- action:
-  - alias: Ouverture volet Salon
-    data:
-      entity_id: cover.volet_salon
-    service: cover.open_cover
+- id: '1504888310936'
   alias: Ouverture volet en journée (Salon)
+  trigger:
+  - entity_id: light.lumieres_salon
+    from: 'off'
+    platform: state
+    to: 'on'
+  - event: sunrise
+    platform: sun
   condition:
   - condition: and
     conditions:
@@ -309,29 +312,26 @@
     - condition: state
       entity_id: light.salon
       state: 'on'
-  id: '1504888310936'
-  trigger:
-  - entity_id: light.salon
-    from: 'off'
-    platform: state
-    to: 'on'
-  - event: sunrise
-    platform: sun
-- action:
-  - alias: Extinction lumière automatique
+  action:
+  - alias: Ouverture volet Salon
     data:
-      entity_id: light.salon
-    service: light.turn_off
+      entity_id: cover.volet_salon
+    service: cover.open_cover
+- id: '1506437908730'
   alias: Lumière du jour suffisante dans salon
-  condition:
-  - condition: state
-    entity_id: light.salon
-    state: 'on'
-  id: '1506437908730'
   trigger:
   - platform: template
     value_template: '{{ states.sensor.multisensor_entree_luminance.state | float >
       20 }}'
+  condition:
+  - condition: state
+    entity_id: light.lumieres_salon
+    state: 'on'
+  action:
+  - alias: Extinction lumière automatique
+    data:
+      entity_id: light.salon
+    service: light.turn_off
 - action:
   - alias: Lumière Bienvenue
     data:

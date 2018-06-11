@@ -1,4 +1,4 @@
-import appdaemon.appapi as appapi
+import appdaemon.plugins.hass.hassapi as hass
 
 #
 # App to handle babyphone
@@ -8,17 +8,17 @@ import appdaemon.appapi as appapi
 #media_player: Media player to play the babyphone alarm
 #lights: Lights to be turn on with the baby alarm
 #sonos (optionnal): Set to 1 if the media player is a Sonos player
+#constrain_input_boolean: input_boolean.room
 #
 # Release Notes
 #
 # Version 1.0:
 #   Initial Version
 
-class BabyPhoneHandler(appapi.AppDaemon):
+class BabyPhoneHandler(hass.Hass):
     """Event listener for babyphone events."""
 
     def initialize(self):
-        #self.register_constraint("media_player_selection")
         self.listen_state(
             self.babyphone_alarm_on, "binary_sensor.ffmpeg_noise", new="on"
             )
