@@ -6,6 +6,9 @@
       platform: state
       entity_id: media_player.salon_chromecast
       from: 'off'
+  condition:
+      condition: time
+      after: '07:00:00'
   action:
       service: remote.turn_on
       data:

@@ -7,16 +7,16 @@ climate.remotec_zxt120eu_unused_6:
 sensor.remotec_zxt120eu_temperature:
   ignored: false
   polling_intensity: 0
-sensor.arbre_lumiere_power:
+sensor.fibaro_system_fgwpef_wall_plug_gen5_power:
   ignored: true
   polling_intensity: 0
-sensor.arbre_lumiere_alarm_level:
+sensor.fibaro_system_fgwpef_wall_plug_gen5_alarm_level:
   ignored: true
   polling_intensity: 0
 sensor.multisensor_entree_sourcenodeid:
   ignored: true
   polling_intensity: 0
-sensor.arbre_lumiere_exporting:
+sensor.fibaro_system_fgwpef_wall_plug_gen5_exporting:
   ignored: true
   polling_intensity: 0
 binary_sensor.multisensor_entree_sensor:

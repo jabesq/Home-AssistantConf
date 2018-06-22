@@ -3,7 +3,7 @@ sensors_view:
     icon: mdi:tune
     entities:
       - group.zw_multisensor_entree
-      - group.zw_arbre_lumiere
+      - group.zw_fibaro_system_fgwpef_wall_plug_gen5
       - group.zw_detecteur_inondation
       - group.hue_tap_salon
       - group.hue_motion_cuisine

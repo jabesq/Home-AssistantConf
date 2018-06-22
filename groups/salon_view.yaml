@@ -6,7 +6,7 @@ light_salon:
       - light.lampe_du_cube
       - light.hue_go
       - group.spots_salon
-      - switch.arbre_lumiere_switch
+      - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
       
 salon_view:
     view: yes
