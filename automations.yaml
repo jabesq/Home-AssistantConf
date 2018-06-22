@@ -144,7 +144,7 @@
 - action:
   - alias: Allumer Arbre Lumière
     data:
-      entity_id: switch.arbre_lumiere_switch
+      entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
     service: switch.turn_on
   - data:
       entity_id: switch.guirlande_noel
@@ -152,7 +152,7 @@
   alias: Synchro Lumière Salon (ON)
   condition:
   - condition: state
-    entity_id: switch.arbre_lumiere_switch
+    entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
     state: 'off'
   id: on_arbre_lumière
   trigger:
@@ -164,7 +164,7 @@
   - delay: 00:00:10
   - alias: extinction Arbre lumière
     data:
-      entity_id: switch.arbre_lumiere_switch
+      entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
     service: switch.turn_off
   - data:
       entity_id: switch.guirlande_noel
@@ -172,7 +172,7 @@
   alias: Synchro Lumière Salon (OFF)
   condition:
   - condition: state
-    entity_id: switch.arbre_lumiere_switch
+    entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
     state: 'on'
   id: off_arbre_lumière
   trigger:
@@ -313,10 +313,11 @@
       entity_id: light.salon
       state: 'on'
   action:
-  - alias: Ouverture volet Salon
-    data:
+  - before: '18:00:00'
+    condition: time
+  - data:
       entity_id: cover.volet_salon
-    service: cover.open_cover
+    service: cover.stop_cover
 - id: '1506437908730'
   alias: Lumière du jour suffisante dans salon
   trigger:

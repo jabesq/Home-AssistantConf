@@ -31,10 +31,10 @@ group:
     netatmo_salon:
         name: Netatmo Salon
         entities:
-          - sensor.netatmo_station_temperature
-          - sensor.netatmo_station_co2
-          - sensor.netatmo_station_humidity
-          - sensor.netatmo_station_noise
+          - sensor.netatmo_salon_temperature
+          - sensor.netatmo_salon_co2
+          - sensor.netatmo_salon_humidity
+          - sensor.netatmo_salon_noise
     
     netatmo_exterieur:
         name: Netatmo Extérieur

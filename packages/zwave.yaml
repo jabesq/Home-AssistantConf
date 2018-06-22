@@ -2,17 +2,17 @@ homeassistant:
     customize:
         binary_sensor.multisensor_entree_sensor:
             device_class: motion
-        sensor.arbre_lumiere_alarm_level:
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_alarm_level:
             hidden: true
-        sensor.arbre_lumiere_alarm_type:
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_alarm_type:
             hidden: true
-        sensor.arbre_lumiere_exporting:
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_exporting:
             hidden: true
-        sensor.arbre_lumiere_power_2:
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_power_2:
             hidden: true
-        sensor.arbre_lumiere_power_management:
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_power_management:
             hidden: true
-        sensor.arbre_lumiere_sourcenodeid:
+        sensor.fibaro_system_fgwpef_wall_plug_gen5_sourcenodeid:
             hidden: true
         sensor.multisensor_entree_alarm_level:
             hidden: true
@@ -43,12 +43,12 @@ group:
           - sensor.multisensor_entree_luminance
           - sensor.multisensor_entree_ultraviolet
           - sensor.multisensor_entree_burglar
-    zw_arbre_lumiere:
+    zw_fibaro_system_fgwpef_wall_plug_gen5:
         name: Arbre Lumière
         entities:
-          - switch.arbre_lumiere_switch
-          - sensor.arbre_lumiere_power
-          - sensor.arbre_lumiere_energy
+          - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+          - sensor.fibaro_system_fgwpef_wall_plug_gen5_power
+          - sensor.fibaro_system_fgwpef_wall_plug_gen5_energy
     zw_detecteur_inondation:
         name: Détecteur Inondation
         entities:

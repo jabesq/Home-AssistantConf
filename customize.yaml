@@ -72,3 +72,8 @@ input_boolean.lumiere_entree_auto:
   homebridge_hidden: true
 input_boolean.neato_weekend:
   homebridge_hidden: true
+binary_sensor.residence_away:
+  friendly_name: Résidence away
+  hidden: true
+sensor.residence_eta:
+  hidden: true

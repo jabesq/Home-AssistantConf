@@ -44,9 +44,6 @@ class BabyPhoneHandler(hass.Hass):
                            entity_id = self.args["media_player"],
                            media_content_type = 'music',
                            media_content_id= 'http://192.168.1.30:8000/babyphone.mp3')
-        if self.sun_down() or ("chambre" in self.args):
-            self.call_service("light/turn_on", entity_id=self.args['lights'],
-                               brightness=150)
 
     def babyphone_alarm_off(self, entity, attribute, old, new, kwargs):
         self.log("Babyphone alarm off")
@@ -55,8 +52,6 @@ class BabyPhoneHandler(hass.Hass):
         if "sonos" in self.args:
             self.call_service("media_player/sonos_restore",
                                entity_id = self.args["media_player"])
-        if self.sun_down():
-            self.call_service("light/turn_off", entity_id=self.args['lights'])
 
     def light_alarm(self, kwargs):
         self.toggle(self.args["alarm_light"])

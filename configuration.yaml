@@ -59,6 +59,7 @@ recorder:
     db_url: postgres://@/hass
     include:
         domains:
+          - climate
           - automation
           - binary_sensor
           - sensor
@@ -95,7 +96,8 @@ recorder:
 history:
     exclude:
         domains:
-            automation
+          - automation
+          - sun
 
 logbook:
 
@@ -178,7 +180,166 @@ apple_tv:
     login_id: !secret apple_tv_id
     start_off: true
 
-emulated_hue:
+alexa:
+    smart_home:
+        filter:
+            include_domains:
+              - cover
+            include_entities:
+              - input_boolean.appletv
+              - input_boolean.ps4
+              - input_boolean.switch
+              - input_boolean.babyphone_chambre
+              - media_player.apple_tv
+              - sensor.netatmo_station_temperature
+              - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+        entity_config:
+            media_player.apple_tv:
+                name: Télévision
+            switch.fibaro_system_fgwpef_wall_plug_gen5_switch:
+                name: Arbre
+                description: Arbre de Lumière
+            input_boolean.appletv:
+                name: Apple TV
+                description: Apple TV du Salon (via Harmony)
+                display_categories: ACTIVITY_TRIGGER
+            input_boolean.ps4:
+                name: Playstation
+                description: Active Playstation 3/4 (via Harmony)
+                display_categories: ACTIVITY_TRIGGER
+            input_boolean.switch:
+                name: Switch
+                description: Nintendo Switch
+                display_categories: ACTIVITY_TRIGGER
+            input_boolean.babyphone_chambre:
+                name: Babyphone
+            cover.volet_chambre_amis:
+                name: Volet Zelda
+                description: Volet de la chambre d'amis
+            cover.volet_cuisine:
+                name: Volet Cuisine
+                description: Volet de la cuisine
+            cover.volet_salon:
+                name: Volet Salon
+                description: Volet du Salon
+            cover.tous_les_volets:
+                name: Tous les volets
+                description: Tous les volets (Salon + Cuisine + Chambre amis)
+            sensor.netatmo_station_temperature:
+                name: Température salon
+
+intent_script:
+    RemoteIntent:
+        async_action: True
+        action:
+          - service_template: >
+                {% macro run_script(button) %}
+                    {% if button=='haut' %}
+                        script.apple_tv_up
+                    {% elif button=='bas' %}
+                        script.apple_tv_down
+                    {% elif button=='gauche' %}
+                        script.apple_tv_left
+                    {% elif button=='droite' %}
+                        script.apple_tv_right
+                    {% elif button=='menu' %}
+                        script.apple_tv_menu
+                    {% elif button=='menu principal' %}
+                        script.apple_tv_top_menu
+                    {% elif button=='lecture' %}
+                        script.apple_tv_play
+                    {% elif button=='pause' %}
+                        script.apple_tv_pause
+                    {% elif button=='entrer' %}
+                        script.apple_tv_select
+                    {% endif %}
+                {% endmacro %}
+                {{ run_script(button_one) }}
+          - service_template: >
+                {% macro run_script(button) %}
+                    {% if button=='haut' %}
+                        script.apple_tv_up
+                    {% elif button=='bas' %}
+                        script.apple_tv_down
+                    {% elif button=='gauche' %}
+                        script.apple_tv_left
+                    {% elif button=='droite' %}
+                        script.apple_tv_right
+                    {% elif button=='menu' %}
+                        script.apple_tv_menu
+                    {% elif button=='menu principal' %}
+                        script.apple_tv_top_menu
+                    {% elif button=='lecture' %}
+                        script.apple_tv_play
+                    {% elif button=='pause' %}
+                        script.apple_tv_pause
+                    {% elif button=='entrer' %}
+                        script.apple_tv_select
+                    {% endif %}
+                {% endmacro %}
+                {% if button_two %}
+                    {{ run_script(button_two) }}
+                {% else %}
+                    None
+                {% endif %}
+          - service_template: >
+                {% macro run_script(button) %}
+                    {% if button=='haut' %}
+                        script.apple_tv_up
+                    {% elif button=='bas' %}
+                        script.apple_tv_down
+                    {% elif button=='gauche' %}
+                        script.apple_tv_left
+                    {% elif button=='droite' %}
+                        script.apple_tv_right
+                    {% elif button=='menu' %}
+                        script.apple_tv_menu
+                    {% elif button=='menu principal' %}
+                        script.apple_tv_top_menu
+                    {% elif button=='lecture' %}
+                        script.apple_tv_play
+                    {% elif button=='pause' %}
+                        script.apple_tv_pause
+                    {% elif button=='entrer' %}
+                        script.apple_tv_select
+                    {% endif %}
+                {% endmacro %}
+                {% if button_three %}
+                    {{ run_script(button_three) }}
+                {% else %}
+                    None
+                {% endif %}
+        speech:
+            type: plain
+            text: OK
+    VolumeUpIntent:
+        async_action: True
+        action:
+          - service: remote.send_command
+            data_template:
+                entity_id: remote.harmony_hub
+                device: 36884492
+                command:
+                  - VolumeUp
+                num_repeats: >
+                    {{ volume | int * 2 }}
+        speech:
+            type: plain
+            text: OK
+    VolumeDownIntent:
+        async_action: True
+        action:
+          - service: remote.send_command
+            data_template:
+                entity_id: remote.harmony_hub
+                device: 36884492
+                command:
+                  - VolumeDown
+                num_repeats: >
+                    {{ volume | int * 2 }}
+        speech:
+            type: plain
+            text: OK
 
 input_boolean:
     lumiere_entree_auto:

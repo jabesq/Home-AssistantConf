@@ -1,0 +1,73 @@
+script:
+  apple_tv_top_menu:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - Home
+  apple_tv_menu:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - Menu
+  apple_tv_select:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - Select
+  apple_tv_right:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - DirectionRight
+  apple_tv_down:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - DirectionDown
+  apple_tv_left:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - DirectionLeft
+  apple_tv_up:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - DirectionUp
+  apple_tv_play:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - Play
+  apple_tv_pause:
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - Pause

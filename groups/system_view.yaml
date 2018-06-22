@@ -16,7 +16,7 @@ system_view:
       - camera.ganondorf_cleaning_map
       - zwave.aeotec_zw090_zstick_gen5_eu
       - zwave.multisensor_entree
-      - zwave.arbre_lumiere
+      - zwave.fibaro_system_fgwpef_wall_plug_gen5
       - zwave.remotec_zxt120eu
       - zwave.detecteur_inondation
       - input_boolean.guest_mode
