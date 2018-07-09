@@ -32,9 +32,9 @@ group:
         entities:
           - light.salon
           - light.couloir
-          - light.chambre
-          - light.chambre_enfant
-          - light.chambre_amis
+          - light.chambre_des_parents
+          - light.chambre_de_ianto
+          - light.chambre_de_zelda
           - light.terrasse
 
     spots_salon:
@@ -62,6 +62,7 @@ group:
         name: Lumière Chambre Enfant
         entities:
           - light.plafond_chambre_enfant
+          - light.lampe_chevet_ianto
 
     lumiere_chambre_ami:
         name: Lumière Chambre Ami
