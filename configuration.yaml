@@ -332,6 +332,10 @@ input_boolean:
         name: Mode Invité
         icon: mdi:account-multiple
 
+climate:
+  - platform: sensibo
+    api_key: !secret sensibo_api_key
+
 #Sensors
 sensor: !include sensors.yaml
 binary_sensor: !include binary_sensors.yaml

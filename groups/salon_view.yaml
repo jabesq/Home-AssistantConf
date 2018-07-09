@@ -18,6 +18,7 @@ salon_view:
     view: yes
     icon: mdi:sofa
     entities:
+      - sensor.temp_moy_salon
       - cover.volet_salon
       - group.netatmo_salon
       - group.flux_salon
@@ -27,6 +28,8 @@ salon_view:
       - switch.interrupteur_salon_2
       - climate.remotec_zxt120eu_cooling_1
       - climate.remotec_zxt120eu_heating_1
+      - climate.salon
+      - group.climatisation
       - media_player.apple_tv
       - media_player.salon
       - media_player.salon_chromecast
