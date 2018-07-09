@@ -19,3 +19,32 @@
           friendly_name: Bayesian probability
           unit_of_measurement: '%'
           value_template: '{{ (states.binary_sensor.bayesian_sleeping.attributes.probability * 100) | round(0) }}'
+      temp_moy_salon:
+          friendly_name: Temperature moyenne
+          unit_of_measurement: '°C'
+          value_template: '{% if states.sensor.netatmo_salon_temperature.state %}
+              {{ (((states.climate.salon.attributes.current_temperature | float) +
+              (states.sensor.netatmo_salon_temperature.state | float)) / 2)|round(1) }}
+          {%else%}
+              {{ states.climate.salon.attributes.current_temperature}}
+          {%endif%}'
+      temp_hi_salon:
+          friendly_name: Temperature ressentie (HeatIndex)
+          unit_of_measurement: '°C'
+          value_template: '
+          {% if states.sensor.temp_moy_salon.state and states.sensor.netatmo_salon_humidity.state %}
+              {{ ( ( (
+                  (-42.379  +
+                  2.04901523 * ((((states.sensor.temp_moy_salon.state |float) +40)*1.8) -40 ) +
+                  10.14333127 * (states.sensor.netatmo_salon_humidity.state | float) +
+                  (-0.22475541 * (((((states.sensor.temp_moy_salon.state |float) +40)*1.8) -40 ) * (states.sensor.netatmo_salon_humidity.state | float))) +
+                  (-6.83783 * (10 ** -3) * ((((states.sensor.temp_moy_salon.state |float) +40)*1.8) -40 ) ** 2) +
+                  (-5.481717 * (10 ** -2) * (states.sensor.netatmo_salon_humidity.state | float) ** 2) +
+                  (1.22874 * (10 ** -3) * ((((states.sensor.temp_moy_salon.state |float) +40)*1.8) -40 ) ** 2 * (states.sensor.netatmo_salon_humidity.state | float)) +
+                  ( 8.5285 * (10**-4)*((((states.sensor.temp_moy_salon.state |float) +40)*1.8) -40 )*(states.sensor.netatmo_salon_humidity.state | float)**2) +
+                  (-1.99*(10**-6)*((states.sensor.netatmo_salon_humidity.state | float)**2)*(((((states.sensor.temp_moy_salon.state |float) +40)*1.8) -40 )**2))
+                  ) + 40) / 1.8) - 40) |round(1)
+              }}
+          {% else %}
+              20
+          {% endif %}'
