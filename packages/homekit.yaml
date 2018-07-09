@@ -1,7 +1,11 @@
 homekit:
     auto_start: False
     filter:
+        include_entities:
+          - device_tracker.hugo_iphone
+          - device_tracker.vanessa
         exclude_domains:
+          - device_tracker
           - light
           - script
           - remote
