@@ -83,3 +83,10 @@ BabyphoneCuisine:
     constrain_input_boolean: input_boolean.babyphone_cuisine
     logfile: STDOUT
     errorfile: STDOUT
+BabyphoneSalon:
+    class: BabyPhoneHandler
+    module: babyphone
+    media_player: media_player.salon_google_home
+    constrain_input_boolean: input_boolean.babyphone_salon
+    logfile: STDOUT
+    errorfile: STDOUT
