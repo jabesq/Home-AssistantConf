@@ -7,6 +7,12 @@ light_salon:
       - light.hue_go
       - group.spots_salon
       - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+
+flux_salon:
+    name: Flux Salon
+    entities:
+      - switch.flux
+      - switch.flux_meuble_tv
       
 salon_view:
     view: yes
@@ -14,6 +20,7 @@ salon_view:
     entities:
       - cover.volet_salon
       - group.netatmo_salon
+      - group.flux_salon
       - group.harmony_hub
       - group.light_salon
       - switch.interrupteur_salon_1

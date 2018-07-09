@@ -29,11 +29,8 @@ sensor:
     monitored_conditions:
       - symbol
 
-
-  - platform: waqi
-    token: !secret waqi_token
-    locations:
-      - Nice Aeroport
+weather:
+  - platform: yweather
 
 group:
     daily_forecast:

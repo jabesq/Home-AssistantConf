@@ -46,3 +46,4 @@ home:
       - group.harmony_activities
       - cover.global_cover
       - camera.salon
+      - weather.yweather

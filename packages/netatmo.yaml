@@ -41,7 +41,7 @@ group:
         entities:
           - sensor.netatmo_exterieur_temperature
           - sensor.netatmo_exterieur_humidity
-          - sensor.netatmo_station_pressure
+          - sensor.netatmo_salon_pressure
     
     netatmo_chambre:
         name: Netatmo Chambre
