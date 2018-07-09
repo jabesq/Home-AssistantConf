@@ -193,27 +193,18 @@ alexa:
               - input_boolean.ps4
               - input_boolean.switch
               - input_boolean.babyphone_chambre
-              - media_player.apple_tv
               - sensor.netatmo_station_temperature
-              - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
         entity_config:
-            media_player.apple_tv:
-                name: Télévision
-            switch.fibaro_system_fgwpef_wall_plug_gen5_switch:
-                name: Arbre
-                description: Arbre de Lumière
             input_boolean.appletv:
                 name: Apple TV
                 description: Apple TV du Salon (via Harmony)
-                display_categories: ACTIVITY_TRIGGER
             input_boolean.ps4:
-                name: Playstation
+                name: Playstation 4
                 description: Active Playstation 3/4 (via Harmony)
-                display_categories: ACTIVITY_TRIGGER
+ #               display_categories: ACTIVITY_TRIGGER
             input_boolean.switch:
-                name: Switch
+                name: Nintendo Switch
                 description: Nintendo Switch
-                display_categories: ACTIVITY_TRIGGER
             input_boolean.babyphone_chambre:
                 name: Babyphone
             cover.volet_chambre_amis:
@@ -312,9 +303,6 @@ intent_script:
                 {% else %}
                     None
                 {% endif %}
-        speech:
-            type: plain
-            text: OK
     VolumeUpIntent:
         async_action: True
         action:
@@ -326,9 +314,6 @@ intent_script:
                   - VolumeUp
                 num_repeats: >
                     {{ volume | int * 2 }}
-        speech:
-            type: plain
-            text: OK
     VolumeDownIntent:
         async_action: True
         action:
@@ -340,9 +325,6 @@ intent_script:
                   - VolumeDown
                 num_repeats: >
                     {{ volume | int * 2 }}
-        speech:
-            type: plain
-            text: OK
 
 input_boolean:
     lumiere_entree_auto:
