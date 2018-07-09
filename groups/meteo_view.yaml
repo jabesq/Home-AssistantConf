@@ -3,6 +3,7 @@ weather_view:
     view: yes
     icon: mdi:weather-partlycloudy
     entities:
+      - weather.yweather
       - group.netatmo_exterieur
       - group.daily_forecast
       - group.weather_overview
