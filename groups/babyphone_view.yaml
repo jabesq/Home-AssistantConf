@@ -1,0 +1,9 @@
+babyphone_view:
+    view: yes
+    icon: mdi:baby-buggy
+    entities:
+      - camera.camera_chambre_ianto
+      - binary_sensor.ffmpeg_noise
+      - group.babyphone_control
+      - group.lumiere_chambre_enfant
+      - group.netatmo_chambre_enfant

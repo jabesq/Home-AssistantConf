@@ -1,11 +1,4 @@
 group:
-    babyphone_view:
-        view: yes
-        icon: mdi:baby-buggy
-        entities:
-          - camera.camera_chambre_ianto
-          - binary_sensor.ffmpeg_noise
-          - group.babyphone_control
     babyphone_control:
         name: Babyphone
         control: hidden
