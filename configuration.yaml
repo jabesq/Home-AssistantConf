@@ -6,7 +6,7 @@ homeassistant:
     unit_system: metric
     # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
     time_zone: Europe/Paris
-    #location required to calculate the time the sun rises and sets
+    # location required to calculate the time the sun rises and sets
     latitude: !secret home_latitude
     longitude: !secret home_longitude
     elevation: 0
@@ -194,13 +194,14 @@ alexa:
               - input_boolean.switch
               - input_boolean.babyphone_chambre
               - sensor.netatmo_station_temperature
+              - remote.harmony_hub
         entity_config:
             input_boolean.appletv:
                 name: Apple TV
                 description: Apple TV du Salon (via Harmony)
             input_boolean.ps4:
                 name: Playstation 4
-                description: Active Playstation 3/4 (via Harmony)
+                description: Playstation 3/4 (via Harmony)
  #               display_categories: ACTIVITY_TRIGGER
             input_boolean.switch:
                 name: Nintendo Switch
@@ -221,6 +222,8 @@ alexa:
                 description: Tous les volets (Salon + Cuisine + Chambre amis)
             sensor.netatmo_station_temperature:
                 name: Température salon
+            remote.harmony_hub:
+                name: Television
 
 intent_script:
     RemoteIntent:

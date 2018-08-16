@@ -122,7 +122,17 @@
       message: Batterie iPhone < 30%, penser a recharger
       title: Batterie iPhone
     service: notify.pushbullet
-- action:
+- id: bed_time
+  alias: Au Dodo
+  trigger:
+  - entity_id: light.lumieres_salon
+    platform: state
+    to: 'off'
+  condition:
+  - after: '22:00:00'
+    before: 06:00:00
+    condition: time
+  action:
   - alias: Fermeture Volet
     data:
       entity_id: cover.tous_les_volets
@@ -131,16 +141,9 @@
     data:
       entity_id: remote.harmony_hub
     service: remote.turn_off
-  alias: Au Dodo
-  condition:
-  - after: '22:00:00'
-    before: 06:00:00
-    condition: time
-  id: bed_time
-  trigger:
-  - entity_id: light.lumieres_salon
-    platform: state
-    to: 'off'
+  - data:
+      entity_id: input_boolean.babyphone_chambre
+    service: input_boolean.turn_on
 - action:
   - alias: Allumer Arbre Lumière
     data:

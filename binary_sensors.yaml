@@ -43,7 +43,7 @@
       above: 1500
     - entity_id: 'sensor.netatmo_chambre_co2'
       prob_given_true: 0.8
-      prob_given_false: 0.5
+      prob_given_false: 0.4
       platform: 'numeric_state'
       above: 1000
     - entity_id: 'sensor.netatmo_chambre_co2'
@@ -60,3 +60,8 @@
       prob_given_false: 0.8
       platform: 'state'
       to_state: 'on'
+
+- platform: ping
+  host: 192.168.1.50
+  count: 2
+  scan_interval: 30

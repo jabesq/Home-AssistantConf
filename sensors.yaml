@@ -22,7 +22,7 @@
       temp_moy_salon:
           friendly_name: Temperature moyenne
           unit_of_measurement: '°C'
-          value_template: '{% if states.sensor.netatmo_salon_temperature.state %}
+          value_template: '{% if states.sensor.netatmo_salon_temperature.state and states.sensor.netatmo_salon_temperature.state != "unknown" %}
               {{ (((states.climate.salon.attributes.current_temperature | float) +
               (states.sensor.netatmo_salon_temperature.state | float)) / 2)|round(1) }}
           {%else%}

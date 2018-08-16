@@ -71,3 +71,12 @@ script:
           device: 37835109
           command:
             - Pause
+  apple_tv_reboot:
+    alias: Reboot AppleTV
+    sequence:
+      - service: remote.send_command
+        data:
+          entity_id: remote.harmony_hub
+          device: 37835109
+          command:
+            - Reboot
