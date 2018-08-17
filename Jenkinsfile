@@ -18,6 +18,9 @@ pip3 install homeassistant
           }
         }
         stage('Copy secrets') {
+          when {
+                not { branch 'secrets' }
+          }
           steps {
             sh '''mv travis_secrets.yaml secrets.yaml
 '''
