@@ -7,6 +7,7 @@ light_salon:
       - light.hue_go
       - group.spots_salon
       - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+      - switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2
 
 flux_salon:
     name: Flux Salon

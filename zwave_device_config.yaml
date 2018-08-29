@@ -46,3 +46,6 @@ sensor.machine_a_laver_sourcenodeid:
 switch.machine_a_laver_switch:
   ignored: true
   polling_intensity: 0
+binary_sensor.fibaro_system_fgdw002_door_opening_sensor_2_sensor:
+  ignored: false
+  polling_intensity: 1

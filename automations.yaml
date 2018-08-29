@@ -125,7 +125,7 @@
 - id: bed_time
   alias: Au Dodo
   trigger:
-  - entity_id: light.lumieres_salon
+  - entity_id: light.salon
     platform: state
     to: 'off'
   condition:
@@ -144,45 +144,45 @@
   - data:
       entity_id: input_boolean.babyphone_chambre
     service: input_boolean.turn_on
-- action:
-  - alias: Allumer Arbre Lumière
-    data:
-      entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
-    service: switch.turn_on
-  - data:
-      entity_id: switch.guirlande_noel
-    service: switch.turn_on
+- id: on_arbre_lumière
   alias: Synchro Lumière Salon (ON)
-  condition:
-  - condition: state
-    entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
-    state: 'off'
-  id: on_arbre_lumière
   trigger:
   - entity_id: light.meuble_tv
     from: 'off'
     platform: state
     to: 'on'
-- action:
+  condition:
+  - condition: state
+    entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+    state: 'off'
+  action:
+  - alias: Allumer Arbre Lumière
+    data:
+      entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+    service: switch.turn_on
+  - data:
+      entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2
+    service: switch.turn_on
+- id: off_arbre_lumière
+  alias: Synchro Lumière Salon (OFF)
+  trigger:
+  - entity_id: light.meuble_tv
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition:
+  - condition: state
+    entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+    state: 'on'
+  action:
   - delay: 00:00:10
   - alias: extinction Arbre lumière
     data:
       entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
     service: switch.turn_off
   - data:
-      entity_id: switch.guirlande_noel
+      entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2
     service: switch.turn_off
-  alias: Synchro Lumière Salon (OFF)
-  condition:
-  - condition: state
-    entity_id: switch.fibaro_system_fgwpef_wall_plug_gen5_switch
-    state: 'on'
-  id: off_arbre_lumière
-  trigger:
-  - entity_id: light.meuble_tv
-    from: 'on'
-    platform: state
-    to: 'off'
 - action:
   - data:
       data:

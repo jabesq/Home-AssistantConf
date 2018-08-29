@@ -2,17 +2,6 @@ light:
   - platform: hue
     scan_interval: 10
   - platform: group
-    name: Lumières Salon
-    entities:
-      - light.spot_bibliotheque
-      - light.spot_entree
-      - light.spot_salon
-      - light.spot_salon_couloir
-      - light.plafonnier_salon
-      - light.meuble_tv
-      - light.lampe_du_cube
-      - light.hue_go
-  - platform: group
     name: Spots Salon
     entities:
       - light.spot_bibliotheque
@@ -68,6 +57,7 @@ group:
         name: Lumière Chambre Ami
         entities:
           - light.lampe_chambre_damis
+          - light.hue_ambiance_candle_1
 
     scene_hue:
         name: Scène Hue

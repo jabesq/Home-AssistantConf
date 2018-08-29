@@ -10,6 +10,9 @@ homeassistant:
     latitude: !secret home_latitude
     longitude: !secret home_longitude
     elevation: 0
+    auth_providers:
+      - type: homeassistant
+      - type: legacy_api_password
     packages: !include_dir_named packages
     customize: !include customize.yaml
     customize_glob:
@@ -36,6 +39,9 @@ http:
     api_password: !secret api_password
     base_url: !secret base_url
     use_x_forwarded_for: True
+    trusted_proxies:
+      - 127.0.0.1
+      - ::1
     trusted_networks:
       - 127.0.0.1
       - ::1
@@ -57,21 +63,6 @@ sun:
 
 recorder:
     db_url: postgres://@/hass
-    include:
-        domains:
-          - climate
-          - automation
-          - binary_sensor
-          - sensor
-          - light
-          - device_tracker
-          - alarm_control_panel
-          - proximity
-          - sun
-          - input_boolean
-          - input_number
-          - switch
-          - media_player
     exclude:
         entities:
           - sensor.yr_symbol
@@ -101,6 +92,8 @@ history:
         domains:
           - automation
           - sun
+          - script
+          - group
 
 logbook:
 
