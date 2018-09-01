@@ -23,10 +23,30 @@ pipeline {
             when  { branch 'secrets' }
             steps {
                 sshagent(['d6f00138-0986-4c78-868b-c92b7a9383d7']) {
-                    sh """ssh pi@dupras.fr cd Home-AssistantConf; git pull -r; sudo systemctl restart home-assistant@homeassistant.service"""
+                    sh """ssh pi@dupras.fr "cd Home-AssistantConf; git pull -r; sudo systemctl restart home-assistant@homeassistant.service" """
                 }
             }
         }
     }
-}
 
+    post {
+        always {
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            slackSend color: 'good',
+                      message: "The pipeline ${currentBuild.fullDisplayName} completed successfully. Hass configuration is updated"
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            slackSend color: 'warning',
+                      message: "This configuration is not working"
+        }
+        changed {
+            echo 'Things were different before...'
+        }
+    }
+}
