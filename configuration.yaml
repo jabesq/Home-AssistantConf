@@ -186,6 +186,7 @@ alexa:
               - input_boolean.ps4
               - input_boolean.switch
               - input_boolean.babyphone_chambre
+              - input_boolean.babyphone_salon
               - sensor.netatmo_station_temperature
               - remote.harmony_hub
         entity_config:
@@ -199,8 +200,10 @@ alexa:
             input_boolean.switch:
                 name: Nintendo Switch
                 description: Nintendo Switch
-            input_boolean.babyphone_chambre:
+            input_boolean.babyphone_salon:
                 name: Babyphone
+            input_boolean.babyphone_chambre:
+                name: Babyphone Chambre
             cover.volet_chambre_amis:
                 name: Volet Zelda
                 description: Volet de la chambre d'amis
