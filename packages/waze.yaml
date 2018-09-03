@@ -12,6 +12,20 @@ sensor:
     region: 'EU'
 
   - platform: waze_travel_time
+    name: Trajet Maison->Travail (Moy.)
+    origin: zone.home
+    destination: zone.work
+    region: 'EU'
+    realtime: False
+
+  - platform: waze_travel_time
+    name: Trajet Travail->Maison (Moy.)
+    origin: zone.work
+    destination: zone.home
+    region: 'EU'
+    realtime: False
+
+  - platform: waze_travel_time
     name: Retour Maison
     origin: device_tracker.hugo_iphone
     destination: zone.home
