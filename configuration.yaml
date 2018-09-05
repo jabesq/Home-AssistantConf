@@ -154,7 +154,7 @@ device_tracker:
   - platform: asuswrt
     host: !secret asuswrt_host
     username: !secret asuswrt_username
-    password: !secret asuswrt_password
+    ssh_key: '/home/homeassistant/.ssh/id_rsa'
 
 proximity:
     home:
