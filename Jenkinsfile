@@ -5,9 +5,17 @@ pipeline {
             agent {
                 docker {
                     image 'docker_hass_image'
+                    args  '-u 0'
                 }
             }
             stages{
+                stage('Deploy key') {
+                    steps{
+                        sh '''mkdir -p /home/homeassistant/.ssh
+cd /home/homeassistant/.ssh
+touch id_rsa'''
+                    }
+                }
                 stage('Copy secrets') {
                     when {
                         not { branch 'secrets' }
