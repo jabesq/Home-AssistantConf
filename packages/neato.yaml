@@ -25,32 +25,22 @@ automation:
         condition: and
         conditions:
           - condition: time
-            after: '10:00:00'
+            after: '09:00:00'
             before: '19:00:00'
-            weekday:
-              - sat
-              - sun
           - condition: state
             entity_id: input_boolean.neato_weekend
             state: 'off'
     action:
-      - service: input_boolean.turn_on
-        entity_id: input_boolean.neato_weekend
-      - service: vacuum.turn_on
+      - service: vacuum.start
         entity_id: vacuum.ganondorf
 
   - alias: "Neato démarré manuellement (Weekend)"
     hide_entity: true
     trigger:
         platform: state
-        entity_id: switch.ganondorf_clean
+        entity_id: vacuum.ganondorf
         from: 'off'
         to: 'on'
-    condition:
-        condition: time
-        weekday:
-          - sat
-          - sun
     action:
         service: input_boolean.turn_on
         entity_id: input_boolean.neato_weekend
