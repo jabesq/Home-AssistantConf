@@ -2,7 +2,7 @@ remote.apple_tv:
   hidden: true
 sensor.uberx_price:
   hidden: true
-sensor.myipopendnscom:
+sensor.myip:
   friendly_name: External IP
   icon: mdi:ethernet
 sensor.duprasfr:

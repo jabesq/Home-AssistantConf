@@ -1,7 +1,7 @@
 ip_group:
     name: Adresses IP
     entities:
-      - sensor.myipopendnscom
+      - sensor.myip
       - sensor.duprasfr
 
 system_view:
