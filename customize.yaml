@@ -89,3 +89,9 @@ light.espace_de_loisirs_1:
   hidden: true
 light.group_for_wakeup:
   hidden: true
+switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2:
+  homebridge_name: Arbre de lumière
+switch.fibaro_system_fgwpef_wall_plug_gen5_switch:
+  homebridge_name: Boule de lumière
+switch.machine_a_laver:
+  homebridge_hidden: true
