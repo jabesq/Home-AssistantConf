@@ -88,11 +88,10 @@
       title: ERP
       data:
         url: https://portail.advans-group.com/ActivityReport
-- alias: Batterie iPhone faible
-  id: low_battery_iphone
-  hide_entity: true
+- id: low_battery_iphone
+  alias: Batterie iPhone faible
   trigger:
-  - below: 30
+  - below: '30'
     entity_id: sensor.battery_iphone
     platform: numeric_state
   - entity_id: device_tracker.hugo_iphone
@@ -122,6 +121,7 @@
       message: Batterie iPhone < 30%, penser a recharger
       title: Batterie iPhone
     service: notify.pushbullet
+  hide_entity: true
 - id: bed_time
   alias: Au Dodo
   trigger:

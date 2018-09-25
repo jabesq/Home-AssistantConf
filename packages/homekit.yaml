@@ -14,10 +14,18 @@ homekit:
           - automation
         exclude_entities:
           - switch.ganondorf_schedule
+          - switch.machine_a_laver
           - input_boolean.babyphone
           - input_boolean.guest_mode
           - input_boolean.neato_weekend
           - input_boolean.lumiere_entree_auto
+          - switch.fibaro_system_fgwpef_wall_plug_gen5_switch
+          - switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2
+    entity_config:
+        switch.fibaro_system_fgwpef_wall_plug_gen5_switch:
+            name: Boule de Lumière
+        switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2:
+            name: Arbre de Lumière
 
 automation:
   - alias: 'Start HomeKit'
