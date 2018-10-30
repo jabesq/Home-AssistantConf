@@ -91,6 +91,7 @@ script:
 
 switch:
   - platform: flux
+    start_time: '07:00'
     stop_time: '21:00'
     lights:
       - light.spot_bibliotheque
@@ -104,6 +105,7 @@ switch:
 
   - platform: flux
     name: "Flux Meuble TV"
+    start_time: '07:00'
     stop_time: '21:00'
     lights:
       - light.meuble_tv
