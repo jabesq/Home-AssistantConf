@@ -299,7 +299,7 @@
 - id: '1504888310936'
   alias: Ouverture volet en journée (Salon)
   trigger:
-  - entity_id: light.lumieres_salon
+  - entity_id: light.salon
     from: 'off'
     platform: state
     to: 'on'
@@ -320,7 +320,7 @@
     condition: time
   - data:
       entity_id: cover.volet_salon
-    service: cover.stop_cover
+    service: cover.open_cover
 - id: '1506437908730'
   alias: Lumière du jour suffisante dans salon
   trigger:
@@ -329,7 +329,7 @@
       20 }}'
   condition:
   - condition: state
-    entity_id: light.lumieres_salon
+    entity_id: light.salon
     state: 'on'
   action:
   - alias: Extinction lumière automatique
@@ -369,3 +369,15 @@
     from: 'off'
     platform: state
     to: 'on'
+- id: '1539717181505'
+  alias: MAJ Flux quand Lumière Salon ON
+  trigger:
+  - entity_id: light.salon
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.flux_update
+  - data: {}
+    service: switch.flux_meuble_tv_update
