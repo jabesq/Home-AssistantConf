@@ -14,6 +14,11 @@ light:
       - light.spot_couloir_1
       - light.spot_couloir_2
 
+sensor:
+  - platform: hue
+    ip_address: !secret hue_ip_address
+    token: !secret hue_token
+
 group:
     lumiere_piece:
         name: Lumière Pièces
