@@ -19,7 +19,7 @@ binary_sensor:
     extra_arguments: -filter:a highpass=f=300,lowpass=f=2500 -codec:a libmp3lame -ar 16000
     output: -f mp3 icecast://stream_user:stream_pw@127.0.0.1:8000/babyphone.mp3
     initial_state: true
-    duration: 2
+    duration: 5
     reset: 60
     peak: -35
 
