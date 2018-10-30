@@ -44,9 +44,6 @@ group.automation_view:
   order: 10
 sensor.fastcom_download:
   icon: mdi:flash
-sensor.capteur_motion_cuisine:
-  hidden: true
-  homebridge_hidden: true
 script.volet_stop:
   hidden: true
 script.fermer_volet:

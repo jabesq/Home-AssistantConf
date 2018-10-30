@@ -1,18 +1,3 @@
-#MQTT Broker
-mqtt:
-    broker: 127.0.0.1
-    port: 1883
-    client_id: home-assistant
-    keepalive: 60
-    username: !secret mqtt_user
-    password: !secret mqtt_passwd
-    birth_message:
-      topic: 'hass/status'
-      payload: 'online'
-    will_message:
-      topic: 'hass/status'
-      payload: 'offline'
-
 sensor:
     platform: mqtt
     state_topic: "owntracks/Hugo/Iphone"
