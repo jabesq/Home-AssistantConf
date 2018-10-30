@@ -72,7 +72,7 @@ BabyphoneChambre:
     module: babyphone
     media_player: media_player.chambre
     sonos: 1
-    constrain_input_boolean: input_boolean.babyphone_chambre
+    input_boolean: input_boolean.babyphone_chambre
     logfile: STDOUT
     errorfile: STDOUT
 BabyphoneCuisine:
@@ -80,13 +80,14 @@ BabyphoneCuisine:
     module: babyphone
     media_player: media_player.cuisine
     sonos: 1
-    constrain_input_boolean: input_boolean.babyphone_cuisine
+    input_boolean: input_boolean.babyphone_cuisine
     logfile: STDOUT
     errorfile: STDOUT
 BabyphoneSalon:
     class: BabyPhoneHandler
     module: babyphone
     media_player: media_player.salon_google_home
-    constrain_input_boolean: input_boolean.babyphone_salon
+    input_boolean: input_boolean.babyphone_salon
     logfile: STDOUT
+    errorfile: STDOUT
     errorfile: STDOUT
