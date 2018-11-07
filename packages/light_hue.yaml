@@ -26,9 +26,9 @@ group:
         entities:
           - light.salon
           - light.couloir
-          - light.chambre_des_parents
-          - light.chambre_de_ianto
-          - light.chambre_de_zelda
+          - light.parents__chambre
+          - light.ianto__chambre
+          - light.zelda__chambre
           - light.terrasse
 
     spots_salon:

@@ -15,6 +15,7 @@ homekit:
         exclude_entities:
           - switch.ganondorf_schedule
           - switch.machine_a_laver
+          - switch.interrupteur_lumiere_cuisine
           - input_boolean.babyphone
           - input_boolean.guest_mode
           - input_boolean.neato_weekend

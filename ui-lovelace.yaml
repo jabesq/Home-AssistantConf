@@ -11,7 +11,7 @@ resources:
     type: js
   - url: /local/tracker-card.js?v=0.1.5
     type: js
-  - url: /local/mini-media-player/mini-media-player.js?v=0.8.8
+  - url: /local/mini-media-player/mini-media-player.js?v=0.9.1
     type: module
 views:
   - id: 0  # Automatically created id
@@ -65,9 +65,10 @@ views:
                 show_header_toggle: false
                 entities:
                   - light.salon
-                  - light.chambre_des_parents
-                  - light.chambre_de_ianto
-                  - light.chambre_de_zelda
+                  - light.cuisine
+                  - light.parents__chambre
+                  - light.ianto__chambre
+                  - light.zelda__chambre
                   - light.couloir
               - type: vertical-stack
                 cards:
@@ -320,7 +321,7 @@ views:
             camera_image: camera.camera_chambre_ianto
             entities:
               - binary_sensor.ffmpeg_noise
-              - light.chambre_de_ianto
+              - light.ianto__chambre
           - type: custom:column-card
             cards:
               - type: entities
@@ -353,6 +354,14 @@ views:
         title: Volet
         entities:
           - cover.volet_cuisine
+      - type: entities
+        title: Lumières
+        entities:
+          - light.hue_ambiance_spot_1
+          - light.hue_ambiance_spot_2
+          - light.hue_ambiance_spot_3
+          - light.hue_ambiance_spot_4
+          - light.hue_ambiance_spot_1_2
       - id: 05f461236a424ce1a4e7d4923813e56a  # Automatically created id
         type: media-control
         entity: media_player.cuisine
@@ -366,9 +375,10 @@ views:
         show_header_toggle: false
         entities:
           - light.salon
-          - light.chambre_des_parents
-          - light.chambre_de_ianto
-          - light.chambre_de_zelda
+          - light.cuisine
+          - light.parents__chambre
+          - light.ianto__chambre
+          - light.zelda__chambre
           - light.couloir
       - id: 3263d79f232b4b9faac889107d3a306d  # Automatically created id
         type: conditional
@@ -402,6 +412,20 @@ views:
               entities:
                 - switch.flux
                 - switch.flux_meuble_tv
+      - type: conditional
+        conditions:
+          - entity: light.cuisine
+            state: on
+        card:
+            type: entities
+            title: Cuisine
+            show_header_toggle: true
+            entities:
+              - light.hue_ambiance_spot_1
+              - light.hue_ambiance_spot_2
+              - light.hue_ambiance_spot_3
+              - light.hue_ambiance_spot_4
+              - light.hue_ambiance_spot_1_2
       - id: 482ad94f80db4f9fb09291ad28ab9346  # Automatically created id
         type: conditional
         conditions:
@@ -417,7 +441,7 @@ views:
       - id: 584baaa8c9f64ca1af076a4ecbdc2608  # Automatically created id
         type: conditional
         conditions:
-          - entity: light.chambre_des_parents
+          - entity: light.parents__chambre
             state: on
         card:
           type: entities
@@ -430,7 +454,7 @@ views:
       - id: b575d666e0bd4e76ab5b26fe412c5e79  # Automatically created id
         type: conditional
         conditions:
-          - entity: light.chambre_de_zelda
+          - entity: light.zelda__chambre
             state: on
         card:
           type: entities
@@ -442,7 +466,7 @@ views:
       - id: e62f35cdf5144cdf9806961744f3e607  # Automatically created id
         type: conditional
         conditions:
-          - entity: light.chambre_de_ianto
+          - entity: light.ianto__chambre
             state: on
         card:
           type: entities
@@ -594,6 +618,7 @@ views:
         type: entities
         entities:
           - input_boolean.guest_mode
+          - switch.interrupteur_lumiere_cuisine
       - id: 31dcc613cc0344a08a2c571e24e007a7  # Automatically created id
         type: vertical-stack
         cards:

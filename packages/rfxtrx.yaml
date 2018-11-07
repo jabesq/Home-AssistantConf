@@ -31,6 +31,12 @@ cover:
       - cover.volet_cuisine
       - cover.volet_chambre_amis
 
+switch:
+    platform: rfxtrx
+    devices:
+        0b150000467b480101027570:
+            name: Interrupteur lumière cuisine
+
 # sensor:
 # - platform: rfxtrx
   # automatic_add: False
