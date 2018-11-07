@@ -42,43 +42,43 @@ input_boolean:
         icon: mdi:hotel
 
 automation:
-  - action:
-      - data:
-            entity_id: binary_sensor.ffmpeg_noise
-        service: ffmpeg.start
-    alias: Babyphone On
-    condition: []
-    trigger:
-      - entity_id: input_boolean.babyphone
-        from: 'off'
-        platform: state
-        to: 'on'
-    initial_state: 'on'
-  - action:
-      - data:
-          entity_id: binary_sensor.ffmpeg_noise
-        service: ffmpeg.stop
-    alias: Babyphone off
-    condition: []
-    trigger:
-      - entity_id: input_boolean.babyphone
-        from: 'on'
-        platform: state
-        to: 'off'
-    initial_state: 'on'
-  - alias: Restart babyphone
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.ping_binary_sensor
-        to: 'on'
-        for:
-            minutes: 2
-    condition:
-      - condition: state
-        entity_id: binary_sensor.ffmpeg_noise
-        state: 'unavailable'
-    action:
-      - data:
-          entity_id: binary_sensor.ffmpeg_noise
-        service: ffmpeg.restart
+#  - action:
+#      - data:
+#            entity_id: binary_sensor.ffmpeg_noise
+#        service: ffmpeg.start
+#    alias: Babyphone On
+#    condition: []
+#    trigger:
+#      - entity_id: input_boolean.babyphone
+#        from: 'off'
+#        platform: state
+#        to: 'on'
+#    initial_state: 'on'
+#  - action:
+#      - data:
+#          entity_id: binary_sensor.ffmpeg_noise
+#        service: ffmpeg.stop
+#    alias: Babyphone off
+#    condition: []
+#    trigger:
+#      - entity_id: input_boolean.babyphone
+#        from: 'on'
+#        platform: state
+#        to: 'off'
+#    initial_state: 'on'
+#  - alias: Restart babyphone
+#    trigger:
+#      - platform: state
+#        entity_id: binary_sensor.ping_binary_sensor
+#        to: 'on'
+#        for:
+#            minutes: 2
+#    condition:
+#      - condition: state
+#        entity_id: binary_sensor.ffmpeg_noise
+#        state: 'unavailable'
+#    action:
+#      - data:
+#          entity_id: binary_sensor.ffmpeg_noise
+#        service: ffmpeg.restart
     

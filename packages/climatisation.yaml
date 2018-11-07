@@ -29,66 +29,66 @@ group:
           - automation.allume_climatisation
           - automation.arrete_climatisation
 
-automation:
-  - initial_state: 'on'
-    alias: 'Allume Climatisation'
-    trigger:
-      - platform: template
-        value_template: >
-            {{ states.sensor.temp_moy_salon.state >= states.input_number.clim_consigne_max.state }}
-      - platform: state
-        entity_id: group.all_devices
-        to: 'home'
-    condition:
-        condition: and
-        conditions:
-          - condition: state
-            entity_id: group.all_devices
-            state: home
-          - condition: state
-            entity_id: climate.salon
-            state: 'off'
-          - condition: template
-            value_template: >
-                {{ states.sensor.temp_moy_salon.state >= states.input_number.clim_consigne_max.state }}
-    action:
-        service: climate.turn_on
-        entity_id: climate.salon
-  - initial_state: 'on'
-    alias: 'Allume Climatisation (hors fournaise)'
-    trigger:
-      - platform: numeric_state
-        entity_id: sensor.temp_moy_salon
-        above: 30
-    condition:
-        condition: state
-        entity_id: climate.salon
-        state: 'off'
-    action:
-        service: climate.turn_on
-        entity_id: climate.salon
-  - initial_state: 'on'
-    alias: 'Arrête Climatisation'
-    trigger:
-      - platform: template
-        value_template: >
-            {{ states.sensor.temp_moy_salon.state <= states.input_number.clim_consigne_min.state }}
-    action:
-        service: climate.turn_off
-        entity_id: climate.salon
-  - initial_state: 'on'
-    alias: 'check Consigne min < max'
-    trigger:
-      - platform: template
-        value_template: >
-            {{ states.input_number.clim_consigne_min.state >= states.input_number.clim_consigne_max.state }}
-    action:
-      - service: input_number.set_value
-        data:
-            entity_id: input_number.clim_consigne_max
-            value: 25
-      - service: input_number.set_value
-        data:
-            entity_id: input_number.clim_consigne_min
-            value: 23
+#automation:
+#  - initial_state: 'on'
+#    alias: 'Allume Climatisation'
+#    trigger:
+#      - platform: template
+#        value_template: >
+#            {{ states.sensor.temp_moy_salon.state >= states.input_number.clim_consigne_max.state }}
+#      - platform: state
+#        entity_id: group.all_devices
+#        to: 'home'
+#    condition:
+#        condition: and
+#        conditions:
+#          - condition: state
+#            entity_id: group.all_devices
+#            state: home
+#          - condition: state
+#            entity_id: climate.salon
+#            state: 'off'
+#          - condition: template
+#            value_template: >
+#                {{ states.sensor.temp_moy_salon.state >= states.input_number.clim_consigne_max.state }}
+#    action:
+#        service: climate.turn_on
+#        entity_id: climate.salon
+#  - initial_state: 'on'
+#    alias: 'Allume Climatisation (hors fournaise)'
+#    trigger:
+#      - platform: numeric_state
+#        entity_id: sensor.temp_moy_salon
+#        above: 30
+#    condition:
+#        condition: state
+#        entity_id: climate.salon
+#        state: 'off'
+#    action:
+#        service: climate.turn_on
+#        entity_id: climate.salon
+#  - initial_state: 'on'
+#    alias: 'Arrête Climatisation'
+#    trigger:
+#      - platform: template
+#        value_template: >
+#            {{ states.sensor.temp_moy_salon.state <= states.input_number.clim_consigne_min.state }}
+#    action:
+#        service: climate.turn_off
+#        entity_id: climate.salon
+#  - initial_state: 'on'
+#    alias: 'check Consigne min < max'
+#    trigger:
+#      - platform: template
+#        value_template: >
+#            {{ states.input_number.clim_consigne_min.state >= states.input_number.clim_consigne_max.state }}
+#    action:
+#      - service: input_number.set_value
+#        data:
+#            entity_id: input_number.clim_consigne_max
+#            value: 25
+#      - service: input_number.set_value
+#        data:
+#            entity_id: input_number.clim_consigne_min
+#            value: 23
 

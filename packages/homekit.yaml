@@ -26,12 +26,3 @@ homekit:
             name: Boule de Lumière
         switch.fibaro_system_fgwpef_wall_plug_gen5_switch_2:
             name: Arbre de Lumière
-
-automation:
-  - alias: 'Start HomeKit'
-    trigger:
-      - platform: homeassistant
-        event: start
-    action:
-      - delay: 00:05  # Waits 5 minutes
-      - service: homekit.start

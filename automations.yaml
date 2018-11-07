@@ -381,3 +381,157 @@
   - service: switch.flux_update
   - data: {}
     service: switch.flux_meuble_tv_update
+- id: '1541522703626'
+  alias: Interrupteur cuisine ON
+  trigger:
+  - entity_id: switch.interrupteur_lumiere_cuisine
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: light.cuisine
+    service: light.turn_on
+- id: '1541522765235'
+  alias: 'Interrupteur Cuisine Off '
+  trigger:
+  - entity_id: switch.interrupteur_lumiere_cuisine
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.cuisine
+    service: light.turn_off
+- alias: "Chromecast => stop ampli"
+  id: 'chromecast_stop_amp'
+  hide_entity: true
+  initial_state: 'on'
+  trigger:
+      platform: state
+      entity_id: media_player.salon_chromecast
+      to: 'off'
+      for:
+          minutes: 1
+  condition:
+      condition: template
+      value_template: '{{ is_state("sensor.harmony_salon", "Regarder Chromecast") }}'
+  action:
+      service: remote.turn_off
+      data:
+          entity_id: remote.harmony_hub
+- action:
+    - data:
+          entity_id: binary_sensor.ffmpeg_noise
+      service: ffmpeg.start
+  alias: Babyphone On
+  condition: []
+  trigger:
+    - entity_id: input_boolean.babyphone
+      from: 'off'
+      platform: state
+      to: 'on'
+  initial_state: 'on'
+  id: 'babyphone_start'
+- action:
+    - data:
+        entity_id: binary_sensor.ffmpeg_noise
+      service: ffmpeg.stop
+  alias: Babyphone off
+  condition: []
+  trigger:
+    - entity_id: input_boolean.babyphone
+      from: 'on'
+      platform: state
+      to: 'off'
+  initial_state: 'on'
+  id: 'babyphone_stop'
+- alias: Restart babyphone
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ping_binary_sensor
+      to: 'on'
+      for:
+          minutes: 2
+  condition:
+    - condition: state
+      entity_id: binary_sensor.ffmpeg_noise
+      state: 'unavailable'
+  action:
+    - data:
+        entity_id: binary_sensor.ffmpeg_noise
+      service: ffmpeg.restart
+  id: 'babyphone_restart'
+- initial_state: 'on'
+  alias: 'Allume Climatisation'
+  id: 'ac_on'
+  trigger:
+    - platform: template
+      value_template: >
+          {{ states.sensor.temp_moy_salon.state >= states.input_number.clim_consigne_max.state }}
+    - platform: state
+      entity_id: group.all_devices
+      to: 'home'
+  condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: group.all_devices
+          state: home
+        - condition: state
+          entity_id: climate.salon
+          state: 'off'
+        - condition: template
+          value_template: >
+              {{ states.sensor.temp_moy_salon.state >= states.input_number.clim_consigne_max.state }}
+  action:
+      service: climate.turn_on
+      entity_id: climate.salon
+- initial_state: 'on'
+  id: 'ac_on2'
+  alias: 'Allume Climatisation (hors fournaise)'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.temp_moy_salon
+      above: 30
+  condition:
+      condition: state
+      entity_id: climate.salon
+      state: 'off'
+  action:
+      service: climate.turn_on
+      entity_id: climate.salon
+- initial_state: 'on'
+  id: 'ac_off'
+  alias: 'Arrête Climatisation'
+  trigger:
+    - platform: template
+      value_template: >
+          {{ states.sensor.temp_moy_salon.state <= states.input_number.clim_consigne_min.state }}
+  action:
+      service: climate.turn_off
+      entity_id: climate.salon
+- initial_state: 'on'
+  id: 'consigne_min_max'
+  alias: 'check Consigne min < max'
+  trigger:
+    - platform: template
+      value_template: >
+          {{ states.input_number.clim_consigne_min.state >= states.input_number.clim_consigne_max.state }}
+  action:
+    - service: input_number.set_value
+      data:
+          entity_id: input_number.clim_consigne_max
+          value: 25
+    - service: input_number.set_value
+      data:
+          entity_id: input_number.clim_consigne_min
+          value: 23
+- alias: 'Start HomeKit'
+  id: start_homekit
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - delay: 00:05  # Waits 5 minutes
+    - service: homekit.start
