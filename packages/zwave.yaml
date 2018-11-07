@@ -47,6 +47,7 @@ climate:
 
 binary_sensor:
   - platform: template
+    entity_id: sensor.fibaro_system_fgdw002_door_opening_sensor_2_access_control
     sensors:
         capteur_ouverture:
             device_class: opening

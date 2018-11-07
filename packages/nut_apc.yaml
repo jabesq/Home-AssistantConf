@@ -22,6 +22,7 @@ sensor:
         - ups.model
   
   - platform: template
+    entity_id: sensor.nut_ups_status_data
     sensors:
       ups_status:
         friendly_name: UPS Status
@@ -41,6 +42,7 @@ sensor:
           {%- endif %}
           
   - platform: template
+    entity_id: sensor.nut_ups_battery_runtime
     sensors:
       ups_battery_runtime_min:
         friendly_name: NUT UPS Battery Runtime
@@ -49,6 +51,7 @@ sensor:
 
 binary_sensor:
   - platform: template
+    entity_id: sensor.nut_ups_status_data
     sensors:
       ups_status_bs:
         friendly_name: UPS

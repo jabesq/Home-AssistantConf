@@ -14,6 +14,9 @@
   hostname: dupras.fr
 
 - platform: template
+  entity_id:
+    - sensor.netatmo_salon_temperature
+    - sensor.netatmo_salon_temperature
   sensors:
       temp_moy_salon:
           friendly_name: Temperature moyenne
